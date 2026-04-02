@@ -1,0 +1,325 @@
+---
+import { getLocalePath } from '../i18n';
+import type { Translations } from '../i18n/en';
+
+interface Props {
+  locale: string;
+  t: Translations;
+}
+
+const { locale, t } = Astro.props;
+---
+
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <p class="hero-eyebrow section-label">{t.hero.eyebrow}</p>
+      <h1 class="hero-heading">
+        <span class="hero-prefix">{t.hero.prefix}</span>
+        <span class="hero-switcher" aria-live="polite">
+          <span class="switcher-track" id="heroSwitcher">
+            {t.hero.items.map((item, i) => (
+              <span class="switcher-word" data-index={i} aria-hidden={i !== 0 ? 'true' : 'false'}>
+                {item}
+              </span>
+            ))}
+          </span>
+        </span>
+        <span class="hero-suffix">{t.hero.suffix}</span>
+      </h1>
+
+      <div class="hero-actions">
+        <a href={getLocalePath(locale, '/projects')} class="btn-primary">
+          {t.hero.cta}
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href={`${getLocalePath(locale, '/about')}#contact`} class="btn-ghost">
+          {t.hero.ctaSecondary}
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-decoration" aria-hidden="true">
+      <div class="deco-line deco-line-1"></div>
+      <div class="deco-line deco-line-2"></div>
+      <div class="deco-circle"></div>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint" aria-hidden="true">
+    <span class="scroll-line"></span>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-inner {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2xl);
+    padding-top: var(--space-2xl);
+    padding-bottom: var(--space-2xl);
+  }
+
+  .hero-text {
+    max-width: 780px;
+  }
+
+  .hero-eyebrow {
+    margin-bottom: var(--space-lg);
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fadeUp 0.8s var(--ease-out-expo) 0.1s forwards;
+  }
+
+  .hero-heading {
+    font-size: var(--text-4xl);
+    font-weight: 300;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: var(--space-xl);
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.9s var(--ease-out-expo) 0.2s forwards;
+  }
+
+  .hero-prefix,
+  .hero-suffix {
+    display: inline;
+  }
+
+  .hero-switcher {
+    display: inline-block;
+    position: relative;
+    vertical-align: bottom;
+    overflow: hidden;
+    height: 1.08em;
+    min-width: 4ch;
+  }
+
+  .switcher-track {
+    display: block;
+    position: relative;
+  }
+
+  .switcher-word {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    color: var(--accent);
+    font-style: italic;
+    font-weight: 400;
+    opacity: 0;
+    transform: translateY(100%);
+    transition:
+      opacity 0.5s var(--ease-out-quart),
+      transform 0.5s var(--ease-out-quart);
+  }
+
+  .switcher-word.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .switcher-word.exiting {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fadeUp 0.8s var(--ease-out-expo) 0.4s forwards;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 0.75em 1.5em;
+    transition: opacity 0.2s, gap 0.3s var(--ease-out-quart);
+  }
+
+  .btn-primary:hover {
+    opacity: 0.8;
+    gap: 0.75em;
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--text-sm);
+    font-weight: 400;
+    color: var(--ink-muted);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .btn-ghost:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+
+  .hero-decoration {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: clamp(200px, 30vw, 400px);
+    height: clamp(200px, 30vw, 400px);
+    pointer-events: none;
+    opacity: 0;
+    animation: fadeIn 1.2s var(--ease-out-expo) 0.6s forwards;
+  }
+
+  .deco-line {
+    position: absolute;
+    background: var(--rule);
+  }
+
+  .deco-line-1 {
+    width: 1px;
+    height: 60%;
+    top: 20%;
+    right: 35%;
+  }
+
+  .deco-line-2 {
+    width: 40%;
+    height: 1px;
+    top: 30%;
+    right: 20%;
+  }
+
+  .deco-circle {
+    position: absolute;
+    width: 45%;
+    height: 45%;
+    border: 1px solid var(--rule);
+    border-radius: 50%;
+    bottom: 15%;
+    right: 15%;
+  }
+
+  .hero-scroll-hint {
+    display: flex;
+    justify-content: center;
+    padding-bottom: var(--space-lg);
+    opacity: 0;
+    animation: fadeIn 1s var(--ease-out-expo) 1.2s forwards;
+  }
+
+  .scroll-line {
+    display: block;
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--ink-faint), transparent);
+    animation: scrollPulse 2s ease-in-out 1.5s infinite;
+  }
+
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.1); }
+  }
+
+  @media (max-width: 768px) {
+    .hero-decoration {
+      display: none;
+    }
+
+    .hero-inner {
+      padding-top: var(--space-xl);
+    }
+  }
+</style>
+
+<script define:vars={{ items: t.hero.items }}>
+  const track = document.getElementById('heroSwitcher');
+  if (!track) throw new Error('Hero switcher not found');
+
+  const words = Array.from(track.querySelectorAll('.switcher-word'));
+  let current = 0;
+
+  function measureWidth() {
+    let maxWidth = 0;
+    words.forEach(w => {
+      const el = w;
+      el.style.position = 'static';
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+      const width = el.getBoundingClientRect().width;
+      if (width > maxWidth) maxWidth = width;
+      el.style.position = '';
+      el.style.opacity = '';
+      el.style.transform = '';
+    });
+    const switcher = track.closest('.hero-switcher');
+    if (switcher) {
+      switcher.style.width = maxWidth + 'px';
+    }
+  }
+
+  function activate(index) {
+    words.forEach((w, i) => {
+      if (i === current && i !== index) {
+        w.classList.remove('active');
+        w.classList.add('exiting');
+        w.setAttribute('aria-hidden', 'true');
+        setTimeout(() => w.classList.remove('exiting'), 500);
+      } else if (i === index) {
+        w.classList.add('active');
+        w.setAttribute('aria-hidden', 'false');
+      } else {
+        w.classList.remove('active', 'exiting');
+        w.setAttribute('aria-hidden', 'true');
+      }
+    });
+    current = index;
+  }
+
+  measureWidth();
+  activate(0);
+
+  setInterval(() => {
+    const next = (current + 1) % words.length;
+    activate(next);
+  }, 2200);
+</script>

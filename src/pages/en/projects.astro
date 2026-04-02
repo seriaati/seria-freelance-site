@@ -1,0 +1,236 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { useTranslations, getLocalePath } from '../../i18n';
+import { projects, getProjectField } from '../../data/projects';
+
+const locale = 'en';
+const t = useTranslations(locale);
+---
+
+<Layout
+  locale={locale}
+  title="Projects — Seria"
+  description="A collection of websites, bots, and automation tools built by Seria."
+>
+  <div class="projects-page">
+    <div class="container">
+      <header class="page-header">
+        <span class="section-label">{t.projects.sectionLabel}</span>
+        <h1 class="page-title">{t.projects.heading}</h1>
+      </header>
+
+      <ol class="projects-list">
+        {projects.map((project, i) => (
+          <li class="project-item">
+            <span class="project-number">0{i + 1}</span>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-category">{getProjectField(project, 'category', locale)}</span>
+                <span class="project-year">{project.year}</span>
+              </div>
+              <h2 class="project-title">{getProjectField(project, 'title', locale)}</h2>
+              <p class="project-desc">{getProjectField(project, 'description', locale)}</p>
+              <ul class="project-tags" aria-label="Technologies used">
+                {project.tags.map(tag => (
+                  <li class="project-tag">{tag}</li>
+                ))}
+              </ul>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <div class="projects-contact">
+        <div class="contact-inner">
+          <p class="contact-label section-label">Work with me</p>
+          <h2 class="contact-heading">Have a project in mind?</h2>
+          <p class="contact-body">
+            I'm available for freelance work. Whether you need a website, a bot, or an automation tool — let's talk.
+          </p>
+          <a href={`${getLocalePath(locale, '/about')}#contact`} class="btn-primary">
+            Get in touch
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .projects-page {
+    padding-top: calc(4rem + var(--space-2xl));
+    padding-bottom: var(--space-3xl);
+  }
+
+  .page-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .page-title {
+    font-size: var(--text-4xl);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  .projects-list {
+    list-style: none;
+    border-top: 1px solid var(--rule);
+    margin-bottom: var(--space-3xl);
+  }
+
+  .project-item {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: var(--space-lg);
+    padding-block: var(--space-xl);
+    border-bottom: 1px solid var(--rule);
+    transition: background-color 0.3s var(--ease-out-quart);
+  }
+
+  .project-item:hover {
+    background-color: var(--paper-warm);
+  }
+
+  .project-item:hover .project-title {
+    transform: translateX(4px);
+  }
+
+  .project-number {
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    color: var(--ink-faint);
+    padding-top: 0.3em;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+
+  .project-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .project-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .project-category {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .project-year {
+    font-size: var(--text-sm);
+    color: var(--ink-faint);
+  }
+
+  .project-title {
+    font-size: var(--text-2xl);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    color: var(--ink);
+    transition: transform 0.3s var(--ease-out-quart);
+  }
+
+  .project-desc {
+    font-size: var(--text-base);
+    color: var(--ink-muted);
+    line-height: 1.65;
+    max-width: 560px;
+    font-weight: 300;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    list-style: none;
+    margin-top: var(--space-xs);
+  }
+
+  .project-tag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+    background: var(--paper-warm);
+    border: 1px solid var(--rule);
+    padding: 0.2em 0.65em;
+  }
+
+  .projects-contact {
+    border: 1px solid var(--rule);
+    padding: var(--space-2xl);
+    background: var(--paper-warm);
+  }
+
+  .contact-inner {
+    max-width: 480px;
+  }
+
+  .contact-label {
+    margin-bottom: var(--space-sm);
+  }
+
+  .contact-heading {
+    font-size: var(--text-2xl);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-md);
+  }
+
+  .contact-body {
+    font-size: var(--text-base);
+    color: var(--ink-muted);
+    line-height: 1.65;
+    font-weight: 300;
+    margin-bottom: var(--space-lg);
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 0.75em 1.5em;
+    transition: opacity 0.2s, gap 0.3s var(--ease-out-quart);
+  }
+
+  .btn-primary:hover {
+    opacity: 0.8;
+    gap: 0.75em;
+  }
+
+  @media (max-width: 480px) {
+    .project-item {
+      grid-template-columns: 1fr;
+    }
+
+    .project-number {
+      display: none;
+    }
+
+    .projects-contact {
+      padding: var(--space-lg);
+    }
+  }
+</style>

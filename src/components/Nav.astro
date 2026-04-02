@@ -1,0 +1,247 @@
+---
+import { Image } from 'astro:assets';
+import { getAlternateLocale, getLocalePath } from '../i18n';
+import type { Translations } from '../i18n/en';
+import logo from '../assets/logo.png';
+
+interface Props {
+  locale: string;
+  t: Translations;
+}
+
+const { locale, t } = Astro.props;
+const altLocale = getAlternateLocale(locale);
+const altLabel = altLocale === 'zh-TW' ? '中文' : 'EN';
+
+const currentPath = Astro.url.pathname;
+const stripLocale = (path: string) => path.replace(/^\/(en)/, '') || '/';
+const basePath = stripLocale(currentPath);
+const altPath = getLocalePath(altLocale, basePath);
+
+const navLinks = [
+  { href: getLocalePath(locale, '/'), label: t.nav.home },
+  { href: getLocalePath(locale, '/about'), label: t.nav.about },
+  { href: getLocalePath(locale, '/projects'), label: t.nav.projects },
+];
+---
+
+<header class="nav-header">
+  <div class="container nav-inner">
+    <a href={getLocalePath(locale, '/')} class="wordmark" aria-label="Seria — Home">
+      <Image src={logo} alt="Seria" height={40} />
+    </a>
+
+    <nav class="nav-links" aria-label="Main navigation">
+      {navLinks.map(link => (
+        <a href={link.href} class="nav-link">{link.label}</a>
+      ))}
+    </nav>
+
+    <div class="nav-actions">
+      <a href={altPath} class="lang-switch" aria-label={`Switch to ${altLocale}`}>
+        {altLabel}
+      </a>
+      <a href={`${getLocalePath(locale, '/about')}#contact`} class="nav-cta">
+        {t.nav.contact}
+      </a>
+    </div>
+
+    <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <div class="mobile-menu" aria-hidden="true">
+    <nav class="mobile-nav">
+      {navLinks.map(link => (
+        <a href={link.href} class="mobile-nav-link">{link.label}</a>
+      ))}
+      <a href={`${getLocalePath(locale, '/about')}#contact`} class="mobile-nav-link">{t.nav.contact}</a>
+    </nav>
+    <a href={altPath} class="mobile-lang-switch">{altLabel}</a>
+  </div>
+</header>
+
+<style>
+  .nav-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: color-mix(in oklch, var(--paper) 92%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    transition: border-color 0.3s var(--ease-out-quart);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    height: 4rem;
+  }
+
+  .wordmark {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .wordmark img {
+    display: block;
+    height: 40px;
+    width: auto;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    margin-left: auto;
+  }
+
+  .nav-link {
+    font-size: var(--text-sm);
+    font-weight: 400;
+    color: var(--ink-muted);
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--ink);
+    transition: width 0.3s var(--ease-out-quart);
+  }
+
+  .nav-link:hover {
+    color: var(--ink);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .lang-switch {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--ink-faint);
+    letter-spacing: 0.08em;
+    transition: color 0.2s;
+  }
+
+  .lang-switch:hover {
+    color: var(--ink);
+  }
+
+  .nav-cta {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 0.4em 1em;
+    letter-spacing: 0.02em;
+    transition: opacity 0.2s;
+  }
+
+  .nav-cta:hover {
+    opacity: 0.75;
+  }
+
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    margin-left: auto;
+  }
+
+  .menu-toggle span {
+    display: block;
+    width: 22px;
+    height: 1px;
+    background: var(--ink);
+    transition: transform 0.3s var(--ease-out-quart), opacity 0.3s;
+  }
+
+  .menu-toggle[aria-expanded="true"] span:first-child {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .menu-toggle[aria-expanded="true"] span:last-child {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  .mobile-menu {
+    display: none;
+    padding: var(--space-lg) var(--gutter) var(--space-xl);
+    border-top: 1px solid var(--rule);
+  }
+
+  .mobile-menu.open {
+    display: block;
+  }
+
+  .mobile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .mobile-nav-link {
+    font-size: var(--text-xl);
+    font-family: var(--font-display);
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  .mobile-lang-switch {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--ink-faint);
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 768px) {
+    .nav-links,
+    .nav-actions {
+      display: none;
+    }
+
+    .menu-toggle {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector('.menu-toggle') as HTMLButtonElement;
+  const mobileMenu = document.querySelector('.mobile-menu') as HTMLElement;
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+    mobileMenu.setAttribute('aria-hidden', String(isOpen));
+    mobileMenu.classList.toggle('open', !isOpen);
+  });
+</script>

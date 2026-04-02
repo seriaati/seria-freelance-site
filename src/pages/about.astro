@@ -1,0 +1,414 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import { useTranslations } from "../i18n";
+import avatar from "../assets/avatar.png";
+
+const locale = "zh-TW";
+const t = useTranslations(locale);
+---
+
+<Layout
+  locale={locale}
+  title="關於我 — Seria"
+  description="了解更多關於 Seria，一位位於台灣的自由接案開發者。"
+>
+  <div class="about-page">
+    <div class="container">
+      <header class="page-header">
+        <span class="section-label">{t.about.sectionLabel}</span>
+        <h1 class="page-title">你好，我是 Seria。</h1>
+      </header>
+
+      <div class="about-grid">
+        <div class="about-main">
+          <p class="about-lead">
+            我是一位位於台灣的自由接案開發者，打造好用又好看的數位產品。
+          </p>
+
+          <div class="about-prose">
+            <p>
+              我專精於網站開發、聊天機器人開發與自動化——這類工作能讓企業運作更順暢、讓使用者更滿意。無論是精緻的網站、管理社群的
+              Discord 機器人，還是在你睡覺時監控價格的爬蟲，我都用心打造。
+            </p>
+            <p>
+              我已有多年的程式開發經驗，服務過從小型在地商家到擁有數千名成員的線上社群等各類客戶。每個專案都得到同等的重視：乾淨的程式碼、清晰的溝通，以及能夠長久運作的成果。
+            </p>
+            <p>
+              不在為客戶開發的時候，我通常在探索新工具、貢獻開源專案，或是想辦法把不需要手動完成的事情自動化。
+            </p>
+          </div>
+
+          <div class="skills-section">
+            <h2 class="skills-heading">我使用的技術</h2>
+            <div class="skills-grid">
+              <div class="skill-group">
+                <h3 class="skill-group-title">網站</h3>
+                <ul class="skill-list">
+                  <li>Astro</li>
+                  <li>TypeScript</li>
+                  <li>React</li>
+                  <li>Node.js</li>
+                </ul>
+              </div>
+              <div class="skill-group">
+                <h3 class="skill-group-title">機器人 & API</h3>
+                <ul class="skill-list">
+                  <li>Discord.js</li>
+                  <li>LINE Messaging API</li>
+                  <li>Telegram Bot API</li>
+                  <li>REST & GraphQL</li>
+                </ul>
+              </div>
+              <div class="skill-group">
+                <h3 class="skill-group-title">自動化</h3>
+                <ul class="skill-list">
+                  <li>Python</li>
+                  <li>Playwright</li>
+                  <li>Puppeteer</li>
+                  <li>排程與定時任務</li>
+                </ul>
+              </div>
+              <div class="skill-group">
+                <h3 class="skill-group-title">基礎架構</h3>
+                <ul class="skill-list">
+                  <li>PostgreSQL</li>
+                  <li>MySQL</li>
+                  <li>Redis</li>
+                  <li>Docker</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="about-sidebar">
+          <div class="avatar-block">
+            <Image
+              src={avatar}
+              alt="Seria"
+              width={220}
+              height={220}
+              class="avatar"
+            />
+          </div>
+          <div class="sidebar-block">
+            <h3 class="sidebar-label">所在地</h3>
+            <p>台灣</p>
+          </div>
+          <div class="sidebar-block">
+            <h3 class="sidebar-label">語言</h3>
+            <p>繁體中文<br />英文</p>
+          </div>
+          <div class="sidebar-block">
+            <h3 class="sidebar-label">接案狀態</h3>
+            <p class="available-badge">目前接受委託</p>
+          </div>
+        </aside>
+      </div>
+
+      <div class="contact-section" id="contact">
+        <div class="contact-section-inner">
+          <div class="contact-text">
+            <span class="section-label">聯絡我</span>
+            <h2 class="contact-heading">有專案想聊聊？</h2>
+            <p class="contact-desc">
+              歡迎透過以下方式聯絡我，我通常在一個工作天內回覆。
+            </p>
+          </div>
+          <div class="contact-actions">
+            <a
+              href="mailto:hi@seria.moe"
+              class="contact-btn contact-btn-primary"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M2 4h12v9H2V4z"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linejoin="round"></path>
+                <path
+                  d="M2 4l6 5 6-5"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+              Email
+            </a>
+            <a
+              href="https://discord.com/users/410036441129943050"
+              class="contact-btn contact-btn-ghost"
+              target="_blank"
+              rel="noopener noreferrer">Discord</a
+            >
+            <a
+              href="https://line.me/ti/p/O4Y5UUJSqK"
+              class="contact-btn contact-btn-ghost"
+              target="_blank"
+              rel="noopener noreferrer">LINE</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .about-page {
+    padding-top: calc(4rem + var(--space-2xl));
+    padding-bottom: var(--space-3xl);
+  }
+
+  .page-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .page-title {
+    font-size: var(--text-4xl);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: var(--space-2xl);
+    align-items: start;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .about-lead {
+    font-size: var(--text-xl);
+    font-family: var(--font-display);
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--ink);
+    margin-bottom: var(--space-xl);
+    font-style: italic;
+  }
+
+  .about-prose {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .about-prose p {
+    font-size: var(--text-base);
+    color: var(--ink-muted);
+    line-height: 1.75;
+    font-weight: 300;
+  }
+
+  .skills-section {
+    border-top: 1px solid var(--rule);
+    padding-top: var(--space-xl);
+  }
+
+  .skills-heading {
+    font-size: var(--text-lg);
+    font-weight: 400;
+    margin-bottom: var(--space-lg);
+    letter-spacing: -0.01em;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+  }
+
+  .skill-group-title {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: var(--space-sm);
+    font-family: var(--font-body);
+  }
+
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35em;
+  }
+
+  .skill-list li {
+    font-size: var(--text-base);
+    color: var(--ink-muted);
+    font-weight: 300;
+  }
+
+  .about-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    padding-top: 0.25em;
+  }
+
+  .avatar-block {
+    width: 100%;
+  }
+
+  .avatar {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    filter: grayscale(20%);
+    border-radius: 6px;
+  }
+
+  .sidebar-block {
+    border-top: 1px solid var(--rule);
+    padding-top: var(--space-md);
+  }
+
+  .sidebar-label {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.4em;
+    font-family: var(--font-body);
+  }
+
+  .sidebar-block p {
+    font-size: var(--text-sm);
+    color: var(--ink-muted);
+    line-height: 1.6;
+  }
+
+  .available-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font-size: var(--text-sm);
+    color: oklch(42% 0.14 145);
+  }
+
+  .available-badge::before {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: oklch(62% 0.18 145);
+  }
+
+  .contact-section {
+    margin-top: var(--space-3xl);
+    border-top: 1px solid var(--rule);
+    padding-top: var(--space-2xl);
+  }
+
+  .contact-section-inner {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-2xl);
+  }
+
+  .contact-heading {
+    font-size: var(--text-3xl);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-top: var(--space-sm);
+    margin-bottom: var(--space-sm);
+  }
+
+  .contact-desc {
+    font-size: var(--text-base);
+    color: var(--ink-muted);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .contact-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    flex-shrink: 0;
+  }
+
+  .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+  }
+
+  .contact-btn-primary {
+    color: var(--paper);
+    background: var(--ink);
+    padding: 0.75em 1.5em;
+  }
+
+  .contact-btn-primary:hover {
+    opacity: 0.8;
+  }
+
+  .contact-btn-ghost {
+    color: var(--ink-muted);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2px;
+    transition:
+      color 0.2s,
+      border-color 0.2s;
+  }
+
+  .contact-btn-ghost:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+
+  @media (max-width: 768px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-sidebar {
+      order: -1;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+    }
+
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-section-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .contact-actions {
+      flex-wrap: wrap;
+    }
+  }
+</style>

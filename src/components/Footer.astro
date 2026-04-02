@@ -1,0 +1,107 @@
+---
+import { Image } from 'astro:assets';
+import { getLocalePath } from '../i18n';
+import type { Translations } from '../i18n/en';
+import logo from '../assets/logo.png';
+
+interface Props {
+  locale: string;
+  t: Translations;
+}
+
+const { locale, t } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-left">
+      <a href={getLocalePath(locale, '/')} class="footer-wordmark">
+        <Image src={logo} alt="Seria" height={48} />
+      </a>
+      <p class="footer-tagline">{t.footer.tagline}</p>
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href={getLocalePath(locale, '/')}>{t.nav.home}</a>
+      <a href={getLocalePath(locale, '/about')}>{t.nav.about}</a>
+      <a href={getLocalePath(locale, '/projects')}>{t.nav.projects}</a>
+      <a href={`${getLocalePath(locale, '/about')}#contact`}>{t.nav.contact}</a>
+    </nav>
+  </div>
+
+  <div class="container footer-bottom">
+    <span class="footer-copy">© {year} Seria. {t.footer.rights}</span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--rule);
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-lg);
+    margin-top: var(--space-3xl);
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .footer-wordmark {
+    display: block;
+    margin-bottom: var(--space-xs);
+  }
+
+  .footer-wordmark img {
+    display: block;
+    height: 48px;
+    width: auto;
+  }
+
+  .footer-tagline {
+    font-size: var(--text-sm);
+    color: var(--ink-muted);
+  }
+
+  .footer-nav {
+    display: flex;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .footer-nav a {
+    font-size: var(--text-sm);
+    color: var(--ink-muted);
+    transition: color 0.2s;
+  }
+
+  .footer-nav a:hover {
+    color: var(--ink);
+  }
+
+  .footer-bottom {
+    padding-top: var(--space-md);
+  }
+
+  .footer-copy {
+    font-size: var(--text-sm);
+    color: var(--ink-faint);
+  }
+
+  @media (max-width: 600px) {
+    .footer-inner {
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    .footer-nav {
+      justify-content: flex-start;
+    }
+  }
+</style>

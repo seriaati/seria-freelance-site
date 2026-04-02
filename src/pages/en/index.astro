@@ -1,0 +1,20 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import AboutPreview from '../../components/AboutPreview.astro';
+import FeaturedProjects from '../../components/FeaturedProjects.astro';
+import { useTranslations } from '../../i18n';
+
+const locale = 'en';
+const t = useTranslations(locale);
+---
+
+<Layout
+  locale={locale}
+  title="Seria — Freelance Developer"
+  description="Freelance developer specializing in websites, bots, and automation tools. Based in Taiwan."
+>
+  <Hero locale={locale} t={t} />
+  <AboutPreview locale={locale} t={t} />
+  <FeaturedProjects locale={locale} t={t} />
+</Layout>

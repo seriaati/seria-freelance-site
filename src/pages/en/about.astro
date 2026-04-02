@@ -1,0 +1,490 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import { useTranslations, getLocalePath } from "../../i18n";
+import avatar from "../../assets/avatar.png";
+
+const locale = "en";
+const t = useTranslations(locale);
+---
+
+<Layout
+  locale={locale}
+  title="About — Seria"
+  description="Learn more about Seria, a freelance developer based in Taiwan."
+>
+  <div class="about-page">
+    <div class="container">
+      <header class="page-header">
+        <span class="section-label">{t.about.sectionLabel}</span>
+        <h1 class="page-title">Hello, I'm Seria.</h1>
+      </header>
+
+      <div class="about-grid">
+        <div class="about-main">
+          <p class="about-lead">
+            I'm a freelance developer based in Taiwan, building digital things
+            that work well and look good.
+          </p>
+
+          <div class="about-prose">
+            <p>
+              I specialize in web development, chatbot development, and
+              automation — the kind of work that makes businesses run smoother
+              and users happier. Whether it's a polished website, a Discord bot
+              that handles your community, or a scraper that monitors prices
+              while you sleep, I build it with care.
+            </p>
+            <p>
+              I've been writing code for several years, working with clients
+              ranging from small local businesses to online communities with
+              thousands of members. Every project gets the same attention: clean
+              code, clear communication, and results that last.
+            </p>
+            <p>
+              When I'm not building things for clients, I'm usually exploring
+              new tools, contributing to open source, or finding ways to
+              automate something that shouldn't need to be done manually.
+            </p>
+          </div>
+
+          <div class="skills-section">
+            <h2 class="skills-heading">What I work with</h2>
+            <div class="skills-grid">
+              <div class="skill-group">
+                <h3 class="skill-group-title">Web</h3>
+                <ul class="skill-list">
+                  <li>Astro</li>
+                  <li>TypeScript</li>
+                  <li>React</li>
+                  <li>Node.js</li>
+                </ul>
+              </div>
+              <div class="skill-group">
+                <h3 class="skill-group-title">Bots & APIs</h3>
+                <ul class="skill-list">
+                  <li>Discord.js</li>
+                  <li>LINE Messaging API</li>
+                  <li>Telegram Bot API</li>
+                  <li>REST & GraphQL</li>
+                </ul>
+              </div>
+              <div class="skill-group">
+                <h3 class="skill-group-title">Automation</h3>
+                <ul class="skill-list">
+                  <li>Python</li>
+                  <li>Playwright</li>
+                  <li>Puppeteer</li>
+                  <li>Cron & Scheduling</li>
+                </ul>
+              </div>
+              <div class="skill-group">
+                <h3 class="skill-group-title">Infrastructure</h3>
+                <ul class="skill-list">
+                  <li>PostgreSQL</li>
+                  <li>MySQL</li>
+                  <li>Redis</li>
+                  <li>Docker</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="about-sidebar">
+          <div class="avatar-block">
+            <Image
+              src={avatar}
+              alt="Seria"
+              width={220}
+              height={220}
+              class="avatar"
+            />
+          </div>
+          <div class="sidebar-block">
+            <h3 class="sidebar-label">Based in</h3>
+            <p>Taiwan</p>
+          </div>
+          <div class="sidebar-block">
+            <h3 class="sidebar-label">Languages</h3>
+            <p>Traditional Chinese<br />English</p>
+          </div>
+          <div class="sidebar-block">
+            <h3 class="sidebar-label">Availability</h3>
+            <p class="available-badge">Available for work</p>
+          </div>
+        </aside>
+      </div>
+
+      <div class="about-cta-row">
+        <a href={getLocalePath(locale, "/projects")} class="btn-primary">
+          See my projects
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M3 8h10M9 4l4 4-4 4"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </a>
+      </div>
+
+      <div class="contact-section" id="contact">
+        <div class="contact-section-inner">
+          <div class="contact-text">
+            <span class="section-label">Contact</span>
+            <h2 class="contact-heading">Have a project in mind?</h2>
+            <p class="contact-desc">
+              Reach out through any of the channels below. I usually respond
+              within one business day.
+            </p>
+          </div>
+          <div class="contact-actions">
+            <a
+              href="mailto:hi@seria.moe"
+              class="contact-btn contact-btn-primary"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M2 4h12v9H2V4z"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linejoin="round"></path>
+                <path
+                  d="M2 4l6 5 6-5"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+              Email
+            </a>
+            <a
+              href="https://discord.com/users/410036441129943050"
+              class="contact-btn contact-btn-ghost"
+              target="_blank"
+              rel="noopener noreferrer">Discord</a
+            >
+            <a
+              href="https://line.me/ti/p/O4Y5UUJSqK"
+              class="contact-btn contact-btn-ghost"
+              target="_blank"
+              rel="noopener noreferrer">LINE</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .about-page {
+    padding-top: calc(4rem + var(--space-2xl));
+    padding-bottom: var(--space-3xl);
+  }
+
+  .page-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .page-title {
+    font-size: var(--text-4xl);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: var(--space-2xl);
+    align-items: start;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .about-lead {
+    font-size: var(--text-xl);
+    font-family: var(--font-display);
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--ink);
+    margin-bottom: var(--space-xl);
+    font-style: italic;
+  }
+
+  .about-prose {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .about-prose p {
+    font-size: var(--text-base);
+    color: var(--ink-muted);
+    line-height: 1.75;
+    font-weight: 300;
+  }
+
+  .skills-section {
+    border-top: 1px solid var(--rule);
+    padding-top: var(--space-xl);
+  }
+
+  .skills-heading {
+    font-size: var(--text-lg);
+    font-weight: 400;
+    margin-bottom: var(--space-lg);
+    letter-spacing: -0.01em;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+  }
+
+  .skill-group-title {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: var(--space-sm);
+    font-family: var(--font-body);
+  }
+
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35em;
+  }
+
+  .skill-list li {
+    font-size: var(--text-base);
+    color: var(--ink-muted);
+    font-weight: 300;
+  }
+
+  .about-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    padding-top: 0.25em;
+  }
+
+  .avatar-block {
+    width: 100%;
+  }
+
+  .avatar {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    filter: grayscale(20%);
+    border-radius: 6px;
+  }
+
+  .sidebar-block {
+    border-top: 1px solid var(--rule);
+    padding-top: var(--space-md);
+  }
+
+  .sidebar-label {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.4em;
+    font-family: var(--font-body);
+  }
+
+  .sidebar-block p {
+    font-size: var(--text-sm);
+    color: var(--ink-muted);
+    line-height: 1.6;
+  }
+
+  .available-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font-size: var(--text-sm);
+    color: oklch(42% 0.14 145);
+  }
+
+  .available-badge::before {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: oklch(62% 0.18 145);
+  }
+
+  .about-cta-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--rule);
+  }
+
+  .contact-section {
+    margin-top: var(--space-3xl);
+    border-top: 1px solid var(--rule);
+    padding-top: var(--space-2xl);
+  }
+
+  .contact-section-inner {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-2xl);
+  }
+
+  .contact-heading {
+    font-size: var(--text-3xl);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-top: var(--space-sm);
+    margin-bottom: var(--space-sm);
+  }
+
+  .contact-desc {
+    font-size: var(--text-base);
+    color: var(--ink-muted);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .contact-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    flex-shrink: 0;
+  }
+
+  .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+  }
+
+  .contact-btn-primary {
+    color: var(--paper);
+    background: var(--ink);
+    padding: 0.75em 1.5em;
+  }
+
+  .contact-btn-primary:hover {
+    opacity: 0.8;
+  }
+
+  .contact-btn-ghost {
+    color: var(--ink-muted);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2px;
+    transition:
+      color 0.2s,
+      border-color 0.2s;
+  }
+
+  .contact-btn-ghost:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 0.75em 1.5em;
+    transition:
+      opacity 0.2s,
+      gap 0.3s var(--ease-out-quart);
+  }
+
+  .btn-primary:hover {
+    opacity: 0.8;
+    gap: 0.75em;
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--text-sm);
+    font-weight: 400;
+    color: var(--ink-muted);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2px;
+    transition:
+      color 0.2s,
+      border-color 0.2s;
+  }
+
+  .btn-ghost:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+
+  @media (max-width: 768px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-sidebar {
+      order: -1;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+    }
+
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-section-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .contact-actions {
+      flex-wrap: wrap;
+    }
+  }
+</style>
