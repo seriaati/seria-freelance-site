@@ -1,22 +1,29 @@
 ---
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
-import { useTranslations } from "../i18n";
+import { useTranslations, getAlternateUrl, SITE_URL } from "../i18n";
 
 interface Props {
   title?: string;
   description?: string;
   locale?: string;
+  ogImage?: string;
 }
 
 const {
   title = "Seria - Freelance Developer",
   description = "Freelance developer specializing in websites, bots, and automation tools.",
   locale = "en",
+  ogImage = "/og-image.png",
 } = Astro.props;
 
 const t = useTranslations(locale);
 const htmlLang = locale === "zh-TW" ? "zh-Hant-TW" : "en";
+
+const canonicalUrl = `${SITE_URL}${Astro.url.pathname}`;
+const alternates = getAlternateUrl(locale, Astro.url.pathname.replace(/^\/(en)/, ''));
+const ogImageUrl = `${SITE_URL}${ogImage}`;
+const FONTS_URL = "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap";
 ---
 
 <!doctype html>
@@ -26,13 +33,38 @@ const htmlLang = locale === "zh-TW" ? "zh-Hant-TW" : "en";
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="generator" content={Astro.generator} />
+
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <link rel="alternate" hreflang="zh-Hant-TW" href={alternates.zhTW} />
+    <link rel="alternate" hreflang="en" href={alternates.en} />
+    <link rel="alternate" hreflang="x-default" href={alternates.en} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content={locale === "zh-TW" ? "zh_TW" : "en_US"} />
+    <meta property="og:site_name" content="Seria" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href={FONTS_URL} />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+      href={FONTS_URL}
       rel="stylesheet"
     />
     <script is:inline>

@@ -1,0 +1,21 @@
+{
+  "name": "Seria - Freelance Developer",
+  "short_name": "Seria",
+  "description": "Freelance developer specializing in websites, bots, and automation tools.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#f7f5f0",
+  "theme_color": "#f7f5f0",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

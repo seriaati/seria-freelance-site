@@ -1,10 +1,29 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { useTranslations, getLocalePath } from "../i18n";
+import { useTranslations, getLocalePath, SITE_URL } from "../i18n";
 import { projects, getProjectField } from "../data/projects";
 
 const locale = "zh-TW";
 const t = useTranslations(locale);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "作品集 | Seria",
+  description: "Seria 開發的網站、機器人與自動化工具作品集。",
+  url: `${SITE_URL}/projects`,
+  author: {
+    "@type": "Person",
+    name: "Seria",
+    url: SITE_URL,
+  },
+  hasPart: projects.map((p) => ({
+    "@type": "CreativeWork",
+    name: getProjectField(p, "title", locale),
+    description: getProjectField(p, "description", locale),
+    dateCreated: p.year,
+  })),
+};
 ---
 
 <Layout
@@ -12,6 +31,7 @@ const t = useTranslations(locale);
   title="作品集 | Seria"
   description="Seria 開發的網站、機器人與自動化工具作品集。"
 >
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <div class="projects-page">
     <div class="container">
       <header class="page-header">

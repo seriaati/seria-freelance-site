@@ -4,10 +4,28 @@ import Hero from "../../components/Hero.astro";
 import AboutPreview from "../../components/AboutPreview.astro";
 import FeaturedProjects from "../../components/FeaturedProjects.astro";
 import Testimonials from "../../components/Testimonials.astro";
-import { useTranslations } from "../../i18n";
+import { useTranslations, SITE_URL } from "../../i18n";
 
 const locale = "en";
 const t = useTranslations(locale);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Seria",
+  jobTitle: "Freelance Developer",
+  url: SITE_URL,
+  description: "Freelance developer specializing in websites, bots, and automation tools. Based in Taiwan.",
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "TW",
+  },
+  knowsAbout: ["Web Development", "Discord Bots", "LINE Bots", "Automation", "Web Scraping"],
+  sameAs: [
+    "https://discord.com/users/410036441129943050",
+    "https://shopee.tw/seriaati",
+  ],
+};
 ---
 
 <Layout
@@ -15,6 +33,7 @@ const t = useTranslations(locale);
   title="Seria | Freelance Developer"
   description="Freelance developer specializing in websites, bots, and automation tools. Based in Taiwan."
 >
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <Hero locale={locale} t={t} />
   <AboutPreview locale={locale} t={t} />
   <FeaturedProjects locale={locale} t={t} />

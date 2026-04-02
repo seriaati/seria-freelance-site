@@ -3,7 +3,7 @@ export const en = {
     home: 'Home',
     about: 'About',
     projects: 'Projects',
-    communities: 'Communities',
+    communities: 'Discord Communities',
     contact: 'Contact',
   },
   hero: {
@@ -28,9 +28,9 @@ export const en = {
     cta: 'More about me',
     page: {
       title: "About - Seria",
-      description: "Learn more about Seria, a freelance developer based in Taiwan.",
-      pageTitle: "Hello, I'm Seria.",
-      lead: "I'm a freelance developer based in Taiwan, building digital things that work well and look good.",
+      description: "Seria is a freelance developer based in Taiwan, specializing in websites, bots, and automation tools.",
+      pageTitle: "Hi, I'm Seria.",
+      lead: "I can turn any idea you have into reality through code.",
       prose1: "I specialize in web development, chatbot development, and automation - the kind of work that makes businesses run smoother and users happier. Whether it's a polished website, a Discord bot that handles your community, or a scraper that monitors prices while you sleep, I build it with care.",
       prose2: "I've been writing code for several years, working with clients ranging from small local businesses to online communities with thousands of members. Every project gets the same attention: high-quality deliverables, clear communication, and results that last.",
       prose3: "Having spent years deep in Discord bot development, I know the platform's capabilities and limitations inside out - which means I can give you informed recommendations and build exactly the bot your community needs.",

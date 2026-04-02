@@ -5,7 +5,7 @@ export const zhTW: Translations = {
     home: '首頁',
     about: '關於我',
     projects: '作品集',
-    communities: '社群',
+    communities: 'Discord 社群',
     contact: '聯絡',
   },
   hero: {
@@ -30,9 +30,9 @@ export const zhTW: Translations = {
     cta: '了解更多',
     page: {
       title: '關於我 - Seria',
-      description: '了解更多關於 Seria，一位位於台灣的自由接案開發者。',
+      description: 'Seria 是一位在台灣的自由接案開發者，專精於網站、機器人與自動化工具的開發。',
       pageTitle: '你好，我是 Seria。',
-      lead: '我是一位位於台灣的自由接案開發者，打造好用又好看的數位產品。',
+      lead: '我能藉由程式碼將你的任何想法化為現實。',
       prose1: '我專精於網站開發、聊天機器人開發與自動化，這類工作能讓企業運作更順暢、讓使用者更滿意。無論是精緻的網站、管理社群的 Discord 機器人，還是在你睡覺時監控價格的爬蟲，我都用心打造。',
       prose2: '我已有多年的程式開發經驗，服務過從小型在地商家到擁有數千名成員的線上社群等各類客戶。每個專案都得到同等的重視：高品質的成品、清晰的溝通，以及能夠長久運作的成果。',
       prose3: '由於長期耕耘於 Discord 機器人開發，我對 Discord 的各種功能和限制都非常熟悉，能夠提供專業的建議和解決方案，幫助你打造最適合你社群的機器人。',

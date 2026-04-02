@@ -1,10 +1,29 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { useTranslations, getLocalePath } from "../../i18n";
+import { useTranslations, getLocalePath, SITE_URL } from "../../i18n";
 import { projects, getProjectField } from "../../data/projects";
 
 const locale = "en";
 const t = useTranslations(locale);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Projects | Seria",
+  description: "A collection of websites, bots, and automation tools built by Seria.",
+  url: `${SITE_URL}/en/projects`,
+  author: {
+    "@type": "Person",
+    name: "Seria",
+    url: SITE_URL,
+  },
+  hasPart: projects.map((p) => ({
+    "@type": "CreativeWork",
+    name: getProjectField(p, "title", locale),
+    description: getProjectField(p, "description", locale),
+    dateCreated: p.year,
+  })),
+};
 ---
 
 <Layout
@@ -12,6 +31,7 @@ const t = useTranslations(locale);
   title="Projects | Seria"
   description="A collection of websites, bots, and automation tools built by Seria."
 >
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <div class="projects-page">
     <div class="container">
       <header class="page-header">
