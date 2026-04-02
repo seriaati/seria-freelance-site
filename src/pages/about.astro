@@ -51,10 +51,6 @@ const p = t.about.page;
             <h3 class="sidebar-label">{p.sidebarLanguages}</h3>
             <p set:html={p.sidebarLanguagesValue.replace('\n', '<br />')} />
           </div>
-          <div class="sidebar-block">
-            <h3 class="sidebar-label">{p.sidebarAvailability}</h3>
-            <p class="available-badge">{p.sidebarAvailabilityValue}</p>
-          </div>
         </aside>
       </div>
 
@@ -225,23 +221,6 @@ const p = t.about.page;
     font-size: var(--text-sm);
     color: var(--ink-muted);
     line-height: 1.6;
-  }
-
-  .available-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4em;
-    font-size: var(--text-sm);
-    color: oklch(42% 0.14 145);
-  }
-
-  .available-badge::before {
-    content: "";
-    display: block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: oklch(62% 0.18 145);
   }
 
   .contact-section {

@@ -1,18 +1,18 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Hero from '../../components/Hero.astro';
-import AboutPreview from '../../components/AboutPreview.astro';
-import FeaturedProjects from '../../components/FeaturedProjects.astro';
-import Testimonials from '../../components/Testimonials.astro';
-import { useTranslations } from '../../i18n';
+import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/Hero.astro";
+import AboutPreview from "../../components/AboutPreview.astro";
+import FeaturedProjects from "../../components/FeaturedProjects.astro";
+import Testimonials from "../../components/Testimonials.astro";
+import { useTranslations } from "../../i18n";
 
-const locale = 'en';
+const locale = "en";
 const t = useTranslations(locale);
 ---
 
 <Layout
   locale={locale}
-  title="Seria — Freelance Developer"
+  title="Seria | Freelance Developer"
   description="Freelance developer specializing in websites, bots, and automation tools. Based in Taiwan."
 >
   <Hero locale={locale} t={t} />

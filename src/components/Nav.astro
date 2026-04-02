@@ -1,9 +1,9 @@
 ---
-import { Image } from 'astro:assets';
-import { getAlternateLocale, getLocalePath } from '../i18n';
-import type { Translations } from '../i18n/en';
-import logoBlack from '../assets/logoBlack.png';
-import logoWhite from '../assets/logoWhite.png';
+import { Image } from "astro:assets";
+import { getAlternateLocale, getLocalePath } from "../i18n";
+import type { Translations } from "../i18n/en";
+import logoBlack from "../assets/logoBlack.png";
+import logoWhite from "../assets/logoWhite.png";
 
 interface Props {
   locale: string;
@@ -12,47 +12,92 @@ interface Props {
 
 const { locale, t } = Astro.props;
 const altLocale = getAlternateLocale(locale);
-const altLabel = altLocale === 'zh-TW' ? '中文' : 'EN';
+const altLabel = altLocale === "zh-TW" ? "中文" : "EN";
 
 const currentPath = Astro.url.pathname;
-const stripLocale = (path: string) => path.replace(/^\/(en)/, '') || '/';
+const stripLocale = (path: string) => path.replace(/^\/(en)/, "") || "/";
 const basePath = stripLocale(currentPath);
 const altPath = getLocalePath(altLocale, basePath);
 
 const navLinks = [
-  { href: getLocalePath(locale, '/'), label: t.nav.home },
-  { href: getLocalePath(locale, '/about'), label: t.nav.about },
-  { href: getLocalePath(locale, '/projects'), label: t.nav.projects },
+  { href: getLocalePath(locale, "/"), label: t.nav.home },
+  { href: getLocalePath(locale, "/about"), label: t.nav.about },
+  { href: getLocalePath(locale, "/projects"), label: t.nav.projects },
+  { href: getLocalePath(locale, "/communities"), label: t.nav.communities },
 ];
 ---
 
 <header class="nav-header">
   <div class="container nav-inner">
-    <a href={getLocalePath(locale, '/')} class="wordmark" aria-label="Seria — Home">
+    <a
+      href={getLocalePath(locale, "/")}
+      class="wordmark"
+      aria-label="Seria - Home"
+    >
       <Image src={logoBlack} alt="Seria" height={40} class="logo-light" />
       <Image src={logoWhite} alt="Seria" height={40} class="logo-dark" />
     </a>
 
     <nav class="nav-links" aria-label="Main navigation">
-      {navLinks.map(link => (
-        <a href={link.href} class="nav-link">{link.label}</a>
-      ))}
+      {
+        navLinks.map((link) => (
+          <a href={link.href} class="nav-link">
+            {link.label}
+          </a>
+        ))
+      }
     </nav>
 
     <div class="nav-actions">
-      <a href={altPath} class="lang-switch" aria-label={`Switch to ${altLocale}`}>
+      <a
+        href={altPath}
+        class="lang-switch"
+        aria-label={`Switch to ${altLocale}`}
+      >
         {altLabel}
       </a>
-      <button class="theme-toggle" aria-label="Toggle dark mode" id="themeToggle">
-        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      <button
+        class="theme-toggle"
+        aria-label="Toggle dark mode"
+        id="themeToggle"
+      >
+        <svg
+          class="icon-sun"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <circle
+            cx="12"
+            cy="12"
+            r="4.5"
+            stroke="currentColor"
+            stroke-width="1.5"></circle>
+          <path
+            d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"></path>
         </svg>
-        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <svg
+          class="icon-moon"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
         </svg>
       </button>
-      <a href={`${getLocalePath(locale, '/about')}#contact`} class="nav-cta">
+      <a href={`${getLocalePath(locale, "/about")}#contact`} class="nav-cta">
         {t.nav.contact}
       </a>
     </div>
@@ -65,10 +110,17 @@ const navLinks = [
 
   <div class="mobile-menu" aria-hidden="true">
     <nav class="mobile-nav">
-      {navLinks.map(link => (
-        <a href={link.href} class="mobile-nav-link">{link.label}</a>
-      ))}
-      <a href={`${getLocalePath(locale, '/about')}#contact`} class="mobile-nav-link">{t.nav.contact}</a>
+      {
+        navLinks.map((link) => (
+          <a href={link.href} class="mobile-nav-link">
+            {link.label}
+          </a>
+        ))
+      }
+      <a
+        href={`${getLocalePath(locale, "/about")}#contact`}
+        class="mobile-nav-link">{t.nav.contact}</a
+      >
     </nav>
     <a href={altPath} class="mobile-lang-switch">{altLabel}</a>
   </div>
@@ -107,24 +159,24 @@ const navLinks = [
     width: auto;
   }
 
-  .logo-dark {
+  .wordmark .logo-dark {
     display: none;
   }
 
-  [data-theme="dark"] .logo-light {
+  :global([data-theme="dark"]) .wordmark .logo-light {
     display: none;
   }
 
-  [data-theme="dark"] .logo-dark {
+  :global([data-theme="dark"]) .wordmark .logo-dark {
     display: block;
   }
 
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .logo-light {
+    :global(:root:not([data-theme="light"])) .wordmark .logo-light {
       display: none;
     }
 
-    :root:not([data-theme="light"]) .logo-dark {
+    :global(:root:not([data-theme="light"])) .wordmark .logo-dark {
       display: block;
     }
   }
@@ -146,7 +198,7 @@ const navLinks = [
   }
 
   .nav-link::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -2px;
     left: 0;
@@ -194,7 +246,9 @@ const navLinks = [
     padding: 0.35em;
     width: 2rem;
     height: 2rem;
-    transition: color 0.2s, border-color 0.2s;
+    transition:
+      color 0.2s,
+      border-color 0.2s;
   }
 
   .theme-toggle:hover {
@@ -205,7 +259,9 @@ const navLinks = [
   .icon-sun,
   .icon-moon {
     position: absolute;
-    transition: opacity 0.2s, transform 0.3s var(--ease-out-quart);
+    transition:
+      opacity 0.2s,
+      transform 0.3s var(--ease-out-quart);
   }
 
   :root:not([data-theme="dark"]) .icon-moon,
@@ -249,7 +305,10 @@ const navLinks = [
     background: var(--ink);
     padding: 0.4em 1em;
     letter-spacing: 0.02em;
-    transition: opacity 0.2s, background-color 0.25s ease, color 0.25s ease;
+    transition:
+      opacity 0.2s,
+      background-color 0.25s ease,
+      color 0.25s ease;
   }
 
   .nav-cta:hover {
@@ -273,7 +332,9 @@ const navLinks = [
     width: 22px;
     height: 1px;
     background: var(--ink);
-    transition: transform 0.3s var(--ease-out-quart), opacity 0.3s;
+    transition:
+      transform 0.3s var(--ease-out-quart),
+      opacity 0.3s;
   }
 
   .menu-toggle[aria-expanded="true"] span:first-child {
@@ -328,28 +389,32 @@ const navLinks = [
 </style>
 
 <script>
-  const toggle = document.querySelector('.menu-toggle') as HTMLButtonElement;
-  const mobileMenu = document.querySelector('.mobile-menu') as HTMLElement;
+  const toggle = document.querySelector(".menu-toggle") as HTMLButtonElement;
+  const mobileMenu = document.querySelector(".mobile-menu") as HTMLElement;
 
-  toggle?.addEventListener('click', () => {
-    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!isOpen));
-    mobileMenu.setAttribute('aria-hidden', String(isOpen));
-    mobileMenu.classList.toggle('open', !isOpen);
+  toggle?.addEventListener("click", () => {
+    const isOpen = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!isOpen));
+    mobileMenu.setAttribute("aria-hidden", String(isOpen));
+    mobileMenu.classList.toggle("open", !isOpen);
   });
 
-  const themeToggle = document.getElementById('themeToggle') as HTMLButtonElement;
+  const themeToggle = document.getElementById(
+    "themeToggle",
+  ) as HTMLButtonElement;
 
   function getEffectiveTheme(): string {
-    const saved = localStorage.getItem('theme');
+    const saved = localStorage.getItem("theme");
     if (saved) return saved;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
   }
 
-  themeToggle?.addEventListener('click', () => {
+  themeToggle?.addEventListener("click", () => {
     const current = getEffectiveTheme();
-    const next = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
+    const next = current === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
   });
 </script>

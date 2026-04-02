@@ -1,7 +1,7 @@
 ---
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import { useTranslations } from '../i18n';
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import { useTranslations } from "../i18n";
 
 interface Props {
   title?: string;
@@ -10,13 +10,13 @@ interface Props {
 }
 
 const {
-  title = 'Seria — Freelance Developer',
-  description = 'Freelance developer specializing in websites, bots, and automation tools.',
-  locale = 'en',
+  title = "Seria - Freelance Developer",
+  description = "Freelance developer specializing in websites, bots, and automation tools.",
+  locale = "en",
 } = Astro.props;
 
 const t = useTranslations(locale);
-const htmlLang = locale === 'zh-TW' ? 'zh-Hant-TW' : 'en';
+const htmlLang = locale === "zh-TW" ? "zh-Hant-TW" : "en";
 ---
 
 <!doctype html>
@@ -35,15 +35,18 @@ const htmlLang = locale === 'zh-TW' ? 'zh-Hant-TW' : 'en';
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
       rel="stylesheet"
     />
-  </head>
-  <script is:inline>
-    (function () {
-      const saved = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const theme = saved || (prefersDark ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', theme);
-    })();
-  </script>
+    <script is:inline>
+      (function () {
+        const saved = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        const theme = saved || (prefersDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script></head
+  >
+
   <body>
     <Nav locale={locale} t={t} />
     <main>
@@ -63,10 +66,11 @@ const htmlLang = locale === 'zh-TW' ? 'zh-Hant-TW' : 'en';
     --accent: oklch(58% 0.14 50);
     --accent-light: oklch(88% 0.06 60);
     --rule: oklch(88% 0.01 80);
-    --theme-transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    --theme-transition:
+      background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 
-    --font-display: 'Cormorant Garamond', 'Noto Serif TC', Georgia, serif;
-    --font-body: 'DM Sans', 'Noto Sans TC', sans-serif;
+    --font-display: "Cormorant Garamond", "Noto Serif TC", Georgia, serif;
+    --font-body: "DM Sans", "Noto Sans TC", sans-serif;
 
     --space-xs: clamp(0.5rem, 1vw, 0.75rem);
     --space-sm: clamp(0.75rem, 1.5vw, 1rem);
@@ -116,7 +120,9 @@ const htmlLang = locale === 'zh-TW' ? 'zh-Hant-TW' : 'en';
     --rule: oklch(24% 0.01 60);
   }
 
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -144,7 +150,10 @@ const htmlLang = locale === 'zh-TW' ? 'zh-Hant-TW' : 'en';
     flex: 1;
   }
 
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-display);
     font-weight: 400;
     line-height: 1.1;
@@ -177,7 +186,9 @@ const htmlLang = locale === 'zh-TW' ? 'zh-Hant-TW' : 'en';
   }
 
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;

@@ -357,7 +357,7 @@ export const projects: Project[] = [
     },
     description: {
       en: 'A comprehensive Discord bot made for Lebi (Artale private server) featuring gamified community engagement with leveling and economy systems, mini-games (number guessing and rock-paper-scissors), birthday celebrations, and integrated store functionality for in-game item trading. The bot includes administrative tools for server management, user surveys, and real-time server status monitoring.',
-      'zh-TW': '一個為樂比仙境（楓之谷 Artale 私服）製作的，功能完整的 Discord 機器人，提供遊戲化的社群互動體驗，包括等級和經濟系統、小遊戲（數字猜謎和剪刀布石頭）、生日慶祝功能，以及整合的商店系統供玩家交易遊戲內物品。機器人還包含伺服器管理工具、使用者問卷調查和即時伺服器狀態監控功能。',
+      'zh-TW': '一個為樂比仙境（楓之谷 Artale 私服）製作的，功能完整的 Discord 機器人，提供遊戲化的社群互動體驗，包括等級和經濟系統、小遊戲（數字猜謎和剪刀石頭布）、生日慶祝功能，以及整合的商店系統供玩家交易遊戲內物品。機器人還包含伺服器管理工具、使用者問卷調查和即時伺服器狀態監控功能。',
     },
   },
 ];

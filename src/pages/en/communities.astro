@@ -1,0 +1,270 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { useTranslations, getLocalePath } from "../../i18n";
+import { discordServers, getServerField, formatMemberCount } from "../../data/discord-servers";
+
+const locale = "en";
+const t = useTranslations(locale);
+---
+
+<Layout
+  locale={locale}
+  title="Discord Communities | Seria"
+  description="Discord community servers built by Seria for clients."
+>
+  <div class="communities-page">
+    <div class="container">
+      <header class="page-header">
+        <span class="section-label">{t.communities.sectionLabel}</span>
+        <h1 class="page-title">{t.communities.heading}</h1>
+        <p class="page-lead">{t.communities.lead}</p>
+      </header>
+
+      <div class="servers-grid">
+        {
+          discordServers.map((server) => {
+            const tags = server.tags ? (getServerField(server, "tags", locale) as string[]) : null;
+            return (
+              <article class="server-card">
+                <div class="card-top">
+                  <div class="member-count">
+                    <span class="count-number">{formatMemberCount(server.memberCount)}</span>
+                    <span class="count-label">{t.communities.members}</span>
+                  </div>
+                </div>
+
+                <div class="card-body">
+                  <h2 class="server-name">{getServerField(server, "name", locale)}</h2>
+                  <p class="server-purpose">{getServerField(server, "purpose", locale)}</p>
+                </div>
+
+                {tags && tags.length > 0 && (
+                  <div class="card-footer">
+                    <ul class="tag-list" aria-label="Tags">
+                      {tags.map((tag) => (
+                        <li class="tag">{tag}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </article>
+            );
+          })
+        }
+      </div>
+
+      <div class="communities-contact">
+        <div class="contact-inner">
+          <p class="contact-label section-label">{t.communities.contactLabel}</p>
+          <h2 class="contact-heading">{t.communities.contactHeading}</h2>
+          <p class="contact-body">{t.communities.contactBody}</p>
+          <a href={`${getLocalePath(locale, "/about")}#contact`} class="btn-primary">
+            {t.communities.contactCta}
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .communities-page {
+    padding-top: calc(4rem + var(--space-2xl));
+    padding-bottom: var(--space-3xl);
+  }
+
+  .page-header {
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .page-title {
+    font-size: var(--text-4xl);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  .page-lead {
+    font-size: var(--text-base);
+    color: var(--ink-muted);
+    line-height: 1.65;
+    font-weight: 300;
+    max-width: 600px;
+    margin-top: var(--space-xs);
+  }
+
+  .servers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+    gap: 1px;
+    background-color: var(--rule);
+    border: 1px solid var(--rule);
+    margin-bottom: var(--space-3xl);
+  }
+
+  .server-card {
+    background: var(--paper);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    transition: background-color 0.25s var(--ease-out-quart);
+    position: relative;
+  }
+
+  .server-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 0;
+    background: var(--accent);
+    transition: height 0.35s var(--ease-out-expo);
+  }
+
+  .server-card:hover {
+    background-color: var(--paper-warm);
+  }
+
+  .server-card:hover::before {
+    height: 100%;
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-md);
+  }
+
+  .member-count {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.1em;
+  }
+
+  .count-number {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .count-label {
+    font-size: var(--text-sm);
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+  }
+
+  .card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .server-name {
+    font-size: var(--text-lg);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  .server-purpose {
+    font-size: var(--text-base);
+    color: var(--ink-muted);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .card-footer {
+    margin-top: auto;
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--rule);
+  }
+
+  .tag-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .tag {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 0.2em 0.6em;
+    background: var(--accent-light);
+  }
+
+  .communities-contact {
+    border: 1px solid var(--rule);
+    padding: var(--space-2xl);
+    background: var(--paper-warm);
+  }
+
+  .contact-inner {
+    max-width: 480px;
+  }
+
+  .contact-label {
+    margin-bottom: var(--space-sm);
+  }
+
+  .contact-heading {
+    font-size: var(--text-2xl);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-md);
+  }
+
+  .contact-body {
+    font-size: var(--text-base);
+    color: var(--ink-muted);
+    line-height: 1.65;
+    font-weight: 300;
+    margin-bottom: var(--space-lg);
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 0.75em 1.5em;
+    transition:
+      opacity 0.2s,
+      gap 0.3s var(--ease-out-quart);
+  }
+
+  .btn-primary:hover {
+    opacity: 0.8;
+    gap: 0.75em;
+  }
+
+  @media (max-width: 480px) {
+    .communities-contact {
+      padding: var(--space-lg);
+    }
+  }
+</style>
