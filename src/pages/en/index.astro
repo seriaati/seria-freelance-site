@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import Hero from "../../components/Hero.astro";
 import AboutPreview from "../../components/AboutPreview.astro";
 import FeaturedProjects from "../../components/FeaturedProjects.astro";
+import FeaturedCommunities from "../../components/FeaturedCommunities.astro";
 import Testimonials from "../../components/Testimonials.astro";
 import { useTranslations, SITE_URL } from "../../i18n";
 
@@ -37,5 +38,6 @@ const jsonLd = {
   <Hero locale={locale} t={t} />
   <AboutPreview locale={locale} t={t} />
   <FeaturedProjects locale={locale} t={t} />
+  <FeaturedCommunities locale={locale} t={t} />
   <Testimonials locale={locale} t={t} />
 </Layout>

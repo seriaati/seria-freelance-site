@@ -1,7 +1,12 @@
 export interface DiscordServer {
   id: string;
+  featured?: boolean;
   memberCount: number;
   icon?: string;
+  category?: {
+    en: string;
+    'zh-TW': string;
+  };
   name: {
     en: string;
     'zh-TW': string;
@@ -19,7 +24,12 @@ export interface DiscordServer {
 export const discordServers: DiscordServer[] = [
   {
     id: 'turtlegame',
+    featured: true,
     memberCount: 274,
+    category: {
+      en: 'Gaming',
+      'zh-TW': '遊戲',
+    },
     name: {
       en: 'TurtleGame Community',
       'zh-TW': '烏龜手遊社群',
@@ -35,7 +45,12 @@ export const discordServers: DiscordServer[] = [
   },
   {
     id: 'twice-fans',
+    featured: true,
     memberCount: 254,
+    category: {
+      en: 'Fan Community',
+      'zh-TW': '粉絲社群',
+    },
     name: {
       en: 'ONE IN A MILLION',
       'zh-TW': 'ONE IN A MILLION',
@@ -47,7 +62,12 @@ export const discordServers: DiscordServer[] = [
   },
   {
     id: 'mt-love',
+    featured: true,
     memberCount: 469,
+    category: {
+      en: 'Business',
+      'zh-TW': '商業',
+    },
     name: {
       en: 'MT Love Community',
       'zh-TW': '初創未來俱樂部',
@@ -63,7 +83,12 @@ export const discordServers: DiscordServer[] = [
   },
   {
     id: 'binot',
+    featured: true,
     memberCount: 30,
+    category: {
+      en: 'Content Creator',
+      'zh-TW': '內容創作者',
+    },
     name: {
       en: 'Binot Community',
       'zh-TW': '比諾特的伺服器',
@@ -159,7 +184,12 @@ export const discordServers: DiscordServer[] = [
   },
   {
     id: 'lloyds-broker',
+    featured: true,
     memberCount: 300,
+    category: {
+      en: 'Corporate',
+      'zh-TW': '企業',
+    },
     name: {
       en: 'Lloyds Broker',
       'zh-TW': '諾億保經',
@@ -187,7 +217,12 @@ export const discordServers: DiscordServer[] = [
   },
   {
     id: 'dmt-trading-club',
+    featured: true,
     memberCount: 322,
+    category: {
+      en: 'Finance',
+      'zh-TW': '金融',
+    },
     name: {
       en: 'DMT Trading Club',
       'zh-TW': 'DMT 交易俱樂部',
@@ -266,6 +301,10 @@ export function getServerField<K extends keyof DiscordServer>(
     return (localized[locale] ?? localized['zh-TW'] ?? '') as never;
   }
   return value as never;
+}
+
+export function getFeaturedServers(): DiscordServer[] {
+  return discordServers.filter((s) => s.featured);
 }
 
 export function formatMemberCount(count: number): string {

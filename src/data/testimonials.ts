@@ -14,6 +14,19 @@ export interface Testimonial {
 
 export const testimonials: Testimonial[] = [
   {
+    id: 'testimonial-3',
+    author: '樂比仙境',
+    role: {
+      en: 'Game Server Owner',
+      'zh-TW': '遊戲伺服器經營',
+    },
+    body: {
+      en: "I hired Seria to set up my Discord channels and write a Discord bot. Throughout the collaboration, not only could Seria handle every requirement I mentioned, but he also proactively warned me about potential issues and offered alternative solutions. Working together was very comfortable and extremely professional. The turnaround was incredibly fast - even when something came up, he'd let me know in advance so I had a clear idea of when things would be done. BTW, since I often forget rarely-used Discord commands, Seria's after-sales support is excellent too - he never just disappears after the job is done and will patiently explain things again whenever I ask. Highly recommended!!!",
+      'zh-TW': '之前請Seria幫我製作DC頻道建立跟寫DC機器人，合作的過程，對於我說出的需求部分，Seria不只都能辦到，還能提前告知我這樣做可能會遇到什麼麻煩，再提供另一個解法給我，合作起來相當舒服而且非常之專業，完工速度也非常快，即便當天有事也會提前跟我說讓我知道進度大概會在什麼時候完成。BTW，因為不常用的DC指令我常常會忘記，Seria的售後服務也很好，不是架好了就不鳥人，忘記了的東西問他也都會不厭其煩地再告訴我一次，大推!!!',
+    },
+    platform: 'Discord',
+  },
+  {
     id: 'testimonial-1',
     author: '米糖',
     role: {
@@ -36,19 +49,6 @@ export const testimonials: Testimonial[] = [
     body: {
       en: 'Seria made a Discord bot for me. Very easy to communicate with and really understood what I wanted. The final product turned out great. I especially love the tiered management feature.',
       'zh-TW': 'Seria 幫我做了discord的機器人，很好溝通，也很理解我想要的方式，成品非常得棒。我特別喜歡分層管理的功能。',
-    },
-    platform: 'Discord',
-  },
-  {
-    id: 'testimonial-3',
-    author: '樂比仙境',
-    role: {
-      en: 'Game Server Owner',
-      'zh-TW': '遊戲伺服器經營',
-    },
-    body: {
-      en: "I hired Seria to set up my Discord channels and write a Discord bot. Throughout the collaboration, not only could Seria handle every requirement I mentioned, but he also proactively warned me about potential issues and offered alternative solutions. Working together was very comfortable and extremely professional. The turnaround was incredibly fast - even when something came up, he'd let me know in advance so I had a clear idea of when things would be done. BTW, since I often forget rarely-used Discord commands, Seria's after-sales support is excellent too - he never just disappears after the job is done and will patiently explain things again whenever I ask. Highly recommended!!!",
-      'zh-TW': '之前請Seria幫我製作DC頻道建立跟寫DC機器人，合作的過程，對於我說出的需求部分，Seria不只都能辦到，還能提前告知我這樣做可能會遇到什麼麻煩，再提供另一個解法給我，合作起來相當舒服而且非常之專業，完工速度也非常快，即便當天有事也會提前跟我說讓我知道進度大概會在什麼時候完成。BTW，因為不常用的DC指令我常常會忘記，Seria的售後服務也很好，不是架好了就不鳥人，忘記了的東西問他也都會不厭其煩地再告訴我一次，大推!!!',
     },
     platform: 'Discord',
   },

@@ -48,7 +48,7 @@ export const zhTW: Translations = {
   },
   projects: {
     sectionLabel: '精選作品',
-    heading: '我做過的東西。',
+    heading: '我做過的專案。',
     cta: '查看所有作品',
     contactLabel: '與我合作',
     contactHeading: '有想法想實現嗎？',
@@ -60,6 +60,9 @@ export const zhTW: Translations = {
     heading: '我建立的伺服器。',
     lead: '每個伺服器都從零開始設計，頻道架構、機器人、身份組與頻道美化，完全依照社群需求量身打造。',
     members: '位成員',
+    featuredSectionLabel: 'Discord 社群',
+    featuredHeading: '我架設的伺服器。',
+    featuredCta: '查看所有社群',
     contactLabel: '想要一個屬於你的社群？',
     contactHeading: '讓我們打造你的社群。',
     contactBody: '一個好的 Discord 伺服器不只是頻道和身份組，你能用便宜的價格為你的社群成員提供出色的體驗。',

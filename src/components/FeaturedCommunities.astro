@@ -1,0 +1,231 @@
+---
+import { getLocalePath } from '../i18n';
+import type { Translations } from '../i18n/en';
+import { getFeaturedServers, getServerField, formatMemberCount } from '../data/discord-servers';
+
+interface Props {
+  locale: string;
+  t: Translations;
+}
+
+const { locale, t } = Astro.props;
+const featured = getFeaturedServers();
+---
+
+<section class="communities-section">
+  <div class="container">
+    <div class="communities-header">
+      <span class="section-label">{t.communities.featuredSectionLabel}</span>
+      <h2 class="communities-heading">{t.communities.featuredHeading}</h2>
+    </div>
+
+    <div class="servers-grid">
+      {featured.map((server) => {
+        const tags = server.tags ? (getServerField(server, 'tags', locale) as string[]) : null;
+        const category = server.category ? (getServerField(server, 'category', locale) as string) : null;
+        return (
+          <article class="server-card">
+            <div class="card-top">
+              {category && (
+                <span class="server-category">{category}</span>
+              )}
+              <div class="member-count">
+                <span class="count-number">{formatMemberCount(server.memberCount)}</span>
+                <span class="count-label">{t.communities.members}</span>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <h3 class="server-name">{getServerField(server, 'name', locale)}</h3>
+              <p class="server-purpose">{getServerField(server, 'purpose', locale)}</p>
+            </div>
+
+            {tags && tags.length > 0 && (
+              <div class="card-footer">
+                <ul class="tag-list" aria-label="Tags">
+                  {tags.map((tag) => (
+                    <li class="tag">{tag}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </article>
+        );
+      })}
+    </div>
+
+    <div class="communities-footer">
+      <a href={getLocalePath(locale, '/communities')} class="communities-cta">
+        {t.communities.featuredCta}
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .communities-section {
+    padding-block: var(--space-3xl);
+    border-top: 1px solid var(--rule);
+  }
+
+  .communities-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .communities-heading {
+    font-size: var(--text-3xl);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .servers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: 1px;
+    background-color: var(--rule);
+    border: 1px solid var(--rule);
+  }
+
+  .server-card {
+    background: var(--paper);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    transition: background-color 0.25s var(--ease-out-quart);
+    position: relative;
+  }
+
+  .server-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 0;
+    background: var(--accent);
+    transition: height 0.35s var(--ease-out-expo);
+  }
+
+  .server-card:hover {
+    background-color: var(--paper-warm);
+  }
+
+  .server-card:hover::before {
+    height: 100%;
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-md);
+  }
+
+  .server-category {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .member-count {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.1em;
+    flex-shrink: 0;
+  }
+
+  .count-number {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .count-label {
+    font-size: var(--text-sm);
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+  }
+
+  .card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .server-name {
+    font-size: var(--text-lg);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  .server-purpose {
+    font-size: var(--text-base);
+    color: var(--ink-muted);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .card-footer {
+    margin-top: auto;
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--rule);
+  }
+
+  .tag-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .tag {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 0.2em 0.6em;
+    background: var(--accent-light);
+  }
+
+  .communities-footer {
+    margin-top: var(--space-xl);
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .communities-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 2px;
+    transition: gap 0.3s var(--ease-out-quart), opacity 0.2s;
+  }
+
+  .communities-cta:hover {
+    gap: 0.75em;
+    opacity: 0.7;
+  }
+</style>
