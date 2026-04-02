@@ -2,7 +2,8 @@
 import { Image } from 'astro:assets';
 import { getLocalePath } from '../i18n';
 import type { Translations } from '../i18n/en';
-import logo from '../assets/logo.png';
+import logoBlack from '../assets/logoBlack.png';
+import logoWhite from '../assets/logoWhite.png';
 
 interface Props {
   locale: string;
@@ -17,7 +18,8 @@ const year = new Date().getFullYear();
   <div class="container footer-inner">
     <div class="footer-left">
       <a href={getLocalePath(locale, '/')} class="footer-wordmark">
-        <Image src={logo} alt="Seria" height={48} />
+        <Image src={logoBlack} alt="Seria" height={48} class="logo-light" />
+        <Image src={logoWhite} alt="Seria" height={48} class="logo-dark" />
       </a>
       <p class="footer-tagline">{t.footer.tagline}</p>
     </div>
@@ -61,6 +63,28 @@ const year = new Date().getFullYear();
     display: block;
     height: 48px;
     width: auto;
+  }
+
+  .logo-dark {
+    display: none;
+  }
+
+  [data-theme="dark"] .logo-light {
+    display: none;
+  }
+
+  [data-theme="dark"] .logo-dark {
+    display: block;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .logo-light {
+      display: none;
+    }
+
+    :root:not([data-theme="light"]) .logo-dark {
+      display: block;
+    }
   }
 
   .footer-tagline {

@@ -6,89 +6,31 @@ import avatar from "../../assets/avatar.png";
 
 const locale = "en";
 const t = useTranslations(locale);
+const p = t.about.page;
 ---
 
 <Layout
   locale={locale}
-  title="About — Seria"
-  description="Learn more about Seria, a freelance developer based in Taiwan."
+  title={p.title}
+  description={p.description}
 >
   <div class="about-page">
     <div class="container">
       <header class="page-header">
         <span class="section-label">{t.about.sectionLabel}</span>
-        <h1 class="page-title">Hello, I'm Seria.</h1>
+        <h1 class="page-title">{p.pageTitle}</h1>
       </header>
 
       <div class="about-grid">
         <div class="about-main">
-          <p class="about-lead">
-            I'm a freelance developer based in Taiwan, building digital things
-            that work well and look good.
-          </p>
+          <p class="about-lead">{p.lead}</p>
 
           <div class="about-prose">
-            <p>
-              I specialize in web development, chatbot development, and
-              automation — the kind of work that makes businesses run smoother
-              and users happier. Whether it's a polished website, a Discord bot
-              that handles your community, or a scraper that monitors prices
-              while you sleep, I build it with care.
-            </p>
-            <p>
-              I've been writing code for several years, working with clients
-              ranging from small local businesses to online communities with
-              thousands of members. Every project gets the same attention: clean
-              code, clear communication, and results that last.
-            </p>
-            <p>
-              When I'm not building things for clients, I'm usually exploring
-              new tools, contributing to open source, or finding ways to
-              automate something that shouldn't need to be done manually.
-            </p>
+            <p>{p.prose1}</p>
+            <p>{p.prose2}</p>
+            <p>{p.prose3}</p>
           </div>
 
-          <div class="skills-section">
-            <h2 class="skills-heading">What I work with</h2>
-            <div class="skills-grid">
-              <div class="skill-group">
-                <h3 class="skill-group-title">Web</h3>
-                <ul class="skill-list">
-                  <li>Astro</li>
-                  <li>TypeScript</li>
-                  <li>React</li>
-                  <li>Node.js</li>
-                </ul>
-              </div>
-              <div class="skill-group">
-                <h3 class="skill-group-title">Bots & APIs</h3>
-                <ul class="skill-list">
-                  <li>Discord.js</li>
-                  <li>LINE Messaging API</li>
-                  <li>Telegram Bot API</li>
-                  <li>REST & GraphQL</li>
-                </ul>
-              </div>
-              <div class="skill-group">
-                <h3 class="skill-group-title">Automation</h3>
-                <ul class="skill-list">
-                  <li>Python</li>
-                  <li>Playwright</li>
-                  <li>Puppeteer</li>
-                  <li>Cron & Scheduling</li>
-                </ul>
-              </div>
-              <div class="skill-group">
-                <h3 class="skill-group-title">Infrastructure</h3>
-                <ul class="skill-list">
-                  <li>PostgreSQL</li>
-                  <li>MySQL</li>
-                  <li>Redis</li>
-                  <li>Docker</li>
-                </ul>
-              </div>
-            </div>
-          </div>
         </div>
 
         <aside class="about-sidebar">
@@ -102,49 +44,26 @@ const t = useTranslations(locale);
             />
           </div>
           <div class="sidebar-block">
-            <h3 class="sidebar-label">Based in</h3>
-            <p>Taiwan</p>
+            <h3 class="sidebar-label">{p.sidebarBasedIn}</h3>
+            <p>{p.sidebarBasedInValue}</p>
           </div>
           <div class="sidebar-block">
-            <h3 class="sidebar-label">Languages</h3>
-            <p>Traditional Chinese<br />English</p>
+            <h3 class="sidebar-label">{p.sidebarLanguages}</h3>
+            <p set:html={p.sidebarLanguagesValue.replace('\n', '<br />')} />
           </div>
           <div class="sidebar-block">
-            <h3 class="sidebar-label">Availability</h3>
-            <p class="available-badge">Available for work</p>
+            <h3 class="sidebar-label">{p.sidebarAvailability}</h3>
+            <p class="available-badge">{p.sidebarAvailabilityValue}</p>
           </div>
         </aside>
-      </div>
-
-      <div class="about-cta-row">
-        <a href={getLocalePath(locale, "/projects")} class="btn-primary">
-          See my projects
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M3 8h10M9 4l4 4-4 4"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"></path>
-          </svg>
-        </a>
       </div>
 
       <div class="contact-section" id="contact">
         <div class="contact-section-inner">
           <div class="contact-text">
-            <span class="section-label">Contact</span>
-            <h2 class="contact-heading">Have a project in mind?</h2>
-            <p class="contact-desc">
-              Reach out through any of the channels below. I usually respond
-              within one business day.
-            </p>
+            <span class="section-label">{p.contactLabel}</span>
+            <h2 class="contact-heading">{p.contactHeading}</h2>
+            <p class="contact-desc">{p.contactDesc}</p>
           </div>
           <div class="contact-actions">
             <a
@@ -176,14 +95,35 @@ const t = useTranslations(locale);
               href="https://discord.com/users/410036441129943050"
               class="contact-btn contact-btn-ghost"
               target="_blank"
-              rel="noopener noreferrer">Discord</a
+              rel="noopener noreferrer"
             >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+              </svg>
+              Discord
+            </a>
             <a
               href="https://line.me/ti/p/O4Y5UUJSqK"
               class="contact-btn contact-btn-ghost"
               target="_blank"
-              rel="noopener noreferrer">LINE</a
+              rel="noopener noreferrer"
             >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+              </svg>
+              LINE
+            </a>
+            <a
+              href="https://shopee.tw/seriaati"
+              class="contact-btn contact-btn-ghost"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.5 7.5h-1.25c0-1.795-1.455-3.25-3.25-3.25S8.75 7.705 8.75 9.5H7.5c0-2.481 2.019-4.5 4.5-4.5s4.5 2.019 4.5 4.5zm1.25 1v6.5a1 1 0 0 1-1 1h-9.5a1 1 0 0 1-1-1V10.5h11.5z"/>
+              </svg>
+              Shopee
+            </a>
           </div>
         </div>
       </div>
@@ -245,47 +185,6 @@ const t = useTranslations(locale);
     font-weight: 300;
   }
 
-  .skills-section {
-    border-top: 1px solid var(--rule);
-    padding-top: var(--space-xl);
-  }
-
-  .skills-heading {
-    font-size: var(--text-lg);
-    font-weight: 400;
-    margin-bottom: var(--space-lg);
-    letter-spacing: -0.01em;
-  }
-
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-xl);
-  }
-
-  .skill-group-title {
-    font-size: var(--text-sm);
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-bottom: var(--space-sm);
-    font-family: var(--font-body);
-  }
-
-  .skill-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.35em;
-  }
-
-  .skill-list li {
-    font-size: var(--text-base);
-    color: var(--ink-muted);
-    font-weight: 300;
-  }
-
   .about-sidebar {
     display: flex;
     flex-direction: column;
@@ -343,14 +242,6 @@ const t = useTranslations(locale);
     height: 6px;
     border-radius: 50%;
     background: oklch(62% 0.18 145);
-  }
-
-  .about-cta-row {
-    display: flex;
-    align-items: center;
-    gap: var(--space-md);
-    padding-top: var(--space-xl);
-    border-top: 1px solid var(--rule);
   }
 
   .contact-section {
@@ -424,44 +315,6 @@ const t = useTranslations(locale);
     border-color: var(--ink);
   }
 
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5em;
-    font-size: var(--text-sm);
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    color: var(--paper);
-    background: var(--ink);
-    padding: 0.75em 1.5em;
-    transition:
-      opacity 0.2s,
-      gap 0.3s var(--ease-out-quart);
-  }
-
-  .btn-primary:hover {
-    opacity: 0.8;
-    gap: 0.75em;
-  }
-
-  .btn-ghost {
-    display: inline-flex;
-    align-items: center;
-    font-size: var(--text-sm);
-    font-weight: 400;
-    color: var(--ink-muted);
-    border-bottom: 1px solid var(--rule);
-    padding-bottom: 2px;
-    transition:
-      color 0.2s,
-      border-color 0.2s;
-  }
-
-  .btn-ghost:hover {
-    color: var(--ink);
-    border-color: var(--ink);
-  }
-
   @media (max-width: 768px) {
     .about-grid {
       grid-template-columns: 1fr;
@@ -472,10 +325,6 @@ const t = useTranslations(locale);
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: var(--space-md);
-    }
-
-    .skills-grid {
-      grid-template-columns: 1fr;
     }
 
     .contact-section-inner {

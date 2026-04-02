@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import AboutPreview from '../components/AboutPreview.astro';
 import FeaturedProjects from '../components/FeaturedProjects.astro';
+import Testimonials from '../components/Testimonials.astro';
 import { useTranslations } from '../i18n';
 
 const locale = 'zh-TW';
@@ -17,4 +18,5 @@ const t = useTranslations(locale);
   <Hero locale={locale} t={t} />
   <AboutPreview locale={locale} t={t} />
   <FeaturedProjects locale={locale} t={t} />
+  <Testimonials locale={locale} t={t} />
 </Layout>

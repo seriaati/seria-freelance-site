@@ -1,0 +1,277 @@
+---
+import type { Translations } from '../i18n/en';
+import { testimonials as testimonialsList, getTestimonialField } from '../data/testimonials';
+
+interface Props {
+  locale: string;
+  t: Translations;
+}
+
+const { locale, t } = Astro.props;
+---
+
+<section class="testimonials-section">
+  <div class="container">
+    <div class="testimonials-header">
+      <span class="section-label">{t.testimonials.sectionLabel}</span>
+      <h2 class="testimonials-heading">{t.testimonials.heading}</h2>
+    </div>
+
+    <div class="testimonials-carousel" aria-label="Testimonials slideshow">
+      <div class="testimonials-track" id="testimonials-track">
+        {testimonialsList.map((testimonial, i) => (
+          <figure class="testimonial-card" role="group" aria-label={`Testimonial ${i + 1} of ${testimonialsList.length}`}>
+            <blockquote class="testimonial-body">
+              <p>{getTestimonialField(testimonial, 'body', locale)}</p>
+            </blockquote>
+            <figcaption class="testimonial-footer">
+              <div class="testimonial-author-info">
+                <span class="testimonial-author">{testimonial.author}</span>
+                <span class="testimonial-role">{getTestimonialField(testimonial, 'role', locale)}</span>
+              </div>
+              {testimonial.platform && (
+                <span class="testimonial-platform">{testimonial.platform}</span>
+              )}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+
+      <div class="testimonials-controls">
+        <button class="carousel-btn" id="prev-btn" aria-label="Previous testimonial">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <div class="carousel-dots" id="carousel-dots">
+          {testimonialsList.map((_, i) => (
+            <button class={`dot${i === 0 ? ' active' : ''}`} data-index={i} aria-label={`Go to testimonial ${i + 1}`} />
+          ))}
+        </div>
+
+        <button class="carousel-btn" id="next-btn" aria-label="Next testimonial">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const track = document.getElementById('testimonials-track') as HTMLElement;
+  const cards = Array.from(track.querySelectorAll<HTMLElement>('.testimonial-card'));
+  const dots = document.querySelectorAll<HTMLButtonElement>('.dot');
+  const prevBtn = document.getElementById('prev-btn') as HTMLButtonElement;
+  const nextBtn = document.getElementById('next-btn') as HTMLButtonElement;
+  const total = dots.length;
+  let current = 0;
+
+  const maxHeight = Math.max(...cards.map(c => c.offsetHeight));
+  track.style.height = `${maxHeight}px`;
+
+  function goTo(index: number) {
+    current = (index + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+  }
+
+  prevBtn.addEventListener('click', () => goTo(current - 1));
+  nextBtn.addEventListener('click', () => goTo(current + 1));
+  dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+
+  let startX = 0;
+  track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', (e) => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+  });
+</script>
+
+<style>
+  .testimonials-section {
+    padding-block: var(--space-3xl);
+    border-top: 1px solid var(--rule);
+  }
+
+  .testimonials-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .testimonials-heading {
+    font-size: var(--text-3xl);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .testimonials-carousel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+
+  .testimonials-track {
+    display: flex;
+    align-items: flex-start;
+    transition: transform 0.5s var(--ease-out-expo);
+    will-change: transform;
+  }
+
+  .testimonial-card {
+    min-width: 100%;
+    background: var(--paper);
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    animation: fadeUp 0.7s var(--ease-out-expo) 0.1s both;
+  }
+
+  .testimonial-body {
+    flex: 1;
+  }
+
+  .testimonial-body p {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--ink);
+    font-style: italic;
+  }
+
+  .testimonial-body p::before {
+    content: '\201C';
+    font-size: 1.4em;
+    line-height: 0;
+    vertical-align: -0.3em;
+    color: var(--accent);
+    margin-right: 0.1em;
+  }
+
+  .testimonial-body p::after {
+    content: '\201D';
+    font-size: 1.4em;
+    line-height: 0;
+    vertical-align: -0.3em;
+    color: var(--accent);
+    margin-left: 0.1em;
+  }
+
+  .testimonial-footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--rule);
+  }
+
+  .testimonial-author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+  }
+
+  .testimonial-author {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+
+  .testimonial-role {
+    font-size: var(--text-sm);
+    color: var(--ink-faint);
+    font-weight: 300;
+  }
+
+  .testimonial-platform {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .testimonials-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-xl);
+    border-top: 1px solid var(--rule);
+  }
+
+  .carousel-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background: none;
+    border: 1px solid var(--rule);
+    color: var(--ink-faint);
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, background-color 0.2s;
+    flex-shrink: 0;
+  }
+
+  .carousel-btn:hover {
+    color: var(--ink);
+    border-color: var(--ink-faint);
+    background-color: var(--paper-warm);
+  }
+
+  .carousel-dots {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: center;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--rule);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background-color 0.2s, transform 0.2s;
+  }
+
+  .dot.active {
+    background: var(--accent);
+    transform: scale(1.4);
+  }
+
+  .dot:hover:not(.active) {
+    background: var(--ink-faint);
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .testimonial-card {
+      padding: var(--space-lg);
+    }
+  }
+</style>

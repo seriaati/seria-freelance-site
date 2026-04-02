@@ -2,7 +2,8 @@
 import { Image } from 'astro:assets';
 import { getAlternateLocale, getLocalePath } from '../i18n';
 import type { Translations } from '../i18n/en';
-import logo from '../assets/logo.png';
+import logoBlack from '../assets/logoBlack.png';
+import logoWhite from '../assets/logoWhite.png';
 
 interface Props {
   locale: string;
@@ -28,7 +29,8 @@ const navLinks = [
 <header class="nav-header">
   <div class="container nav-inner">
     <a href={getLocalePath(locale, '/')} class="wordmark" aria-label="Seria — Home">
-      <Image src={logo} alt="Seria" height={40} />
+      <Image src={logoBlack} alt="Seria" height={40} class="logo-light" />
+      <Image src={logoWhite} alt="Seria" height={40} class="logo-dark" />
     </a>
 
     <nav class="nav-links" aria-label="Main navigation">
@@ -41,6 +43,15 @@ const navLinks = [
       <a href={altPath} class="lang-switch" aria-label={`Switch to ${altLocale}`}>
         {altLabel}
       </a>
+      <button class="theme-toggle" aria-label="Toggle dark mode" id="themeToggle">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
       <a href={`${getLocalePath(locale, '/about')}#contact`} class="nav-cta">
         {t.nav.contact}
       </a>
@@ -96,6 +107,28 @@ const navLinks = [
     width: auto;
   }
 
+  .logo-dark {
+    display: none;
+  }
+
+  [data-theme="dark"] .logo-light {
+    display: none;
+  }
+
+  [data-theme="dark"] .logo-dark {
+    display: block;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .logo-light {
+      display: none;
+    }
+
+    :root:not([data-theme="light"]) .logo-dark {
+      display: block;
+    }
+  }
+
   .nav-links {
     display: flex;
     align-items: center;
@@ -149,6 +182,66 @@ const navLinks = [
     color: var(--ink);
   }
 
+  .theme-toggle {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 1px solid var(--rule);
+    color: var(--ink-muted);
+    cursor: pointer;
+    padding: 0.35em;
+    width: 2rem;
+    height: 2rem;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .theme-toggle:hover {
+    color: var(--ink);
+    border-color: var(--ink-faint);
+  }
+
+  .icon-sun,
+  .icon-moon {
+    position: absolute;
+    transition: opacity 0.2s, transform 0.3s var(--ease-out-quart);
+  }
+
+  :root:not([data-theme="dark"]) .icon-moon,
+  [data-theme="light"] .icon-moon {
+    opacity: 0;
+    transform: rotate(-30deg) scale(0.8);
+  }
+
+  :root:not([data-theme="dark"]) .icon-sun,
+  [data-theme="light"] .icon-sun {
+    opacity: 1;
+    transform: none;
+  }
+
+  [data-theme="dark"] .icon-sun {
+    opacity: 0;
+    transform: rotate(30deg) scale(0.8);
+  }
+
+  [data-theme="dark"] .icon-moon {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .icon-sun {
+      opacity: 0;
+      transform: rotate(30deg) scale(0.8);
+    }
+
+    :root:not([data-theme="light"]) .icon-moon {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
   .nav-cta {
     font-size: var(--text-sm);
     font-weight: 500;
@@ -156,7 +249,7 @@ const navLinks = [
     background: var(--ink);
     padding: 0.4em 1em;
     letter-spacing: 0.02em;
-    transition: opacity 0.2s;
+    transition: opacity 0.2s, background-color 0.25s ease, color 0.25s ease;
   }
 
   .nav-cta:hover {
@@ -243,5 +336,20 @@ const navLinks = [
     toggle.setAttribute('aria-expanded', String(!isOpen));
     mobileMenu.setAttribute('aria-hidden', String(isOpen));
     mobileMenu.classList.toggle('open', !isOpen);
+  });
+
+  const themeToggle = document.getElementById('themeToggle') as HTMLButtonElement;
+
+  function getEffectiveTheme(): string {
+    const saved = localStorage.getItem('theme');
+    if (saved) return saved;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  themeToggle?.addEventListener('click', () => {
+    const current = getEffectiveTheme();
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
   });
 </script>

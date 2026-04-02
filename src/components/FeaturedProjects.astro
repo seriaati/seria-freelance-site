@@ -30,12 +30,19 @@ const featured = getFeaturedProjects();
             </div>
             <h3 class="project-title">{getProjectField(project, 'title', locale)}</h3>
             <p class="project-desc">{getProjectField(project, 'description', locale)}</p>
-            <ul class="project-tags" aria-label="Technologies used">
-              {project.tags.map(tag => (
-                <li class="project-tag">{tag}</li>
-              ))}
-            </ul>
+            {project.tags && project.tags.length > 0 && (
+              <ul class="project-tags" aria-label="Technologies used">
+                {project.tags.map(tag => (
+                  <li class="project-tag">{tag}</li>
+                ))}
+              </ul>
+            )}
           </div>
+          {project.thumbnail && (
+            <div class="project-thumbnail">
+              <img src={project.thumbnail} alt={getProjectField(project, 'title', locale)} loading="lazy" />
+            </div>
+          )}
         </li>
       ))}
     </ol>
@@ -78,12 +85,13 @@ const featured = getFeaturedProjects();
 
   .project-item {
     display: grid;
-    grid-template-columns: 3rem 1fr;
+    grid-template-columns: 3rem 1fr auto;
     gap: var(--space-lg);
     padding-block: var(--space-xl);
     border-bottom: 1px solid var(--rule);
     transition: background-color 0.3s var(--ease-out-quart);
     cursor: default;
+    align-items: start;
   }
 
   .project-item:hover {
@@ -187,6 +195,21 @@ const featured = getFeaturedProjects();
     opacity: 0.7;
   }
 
+  .project-thumbnail {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+
+  .project-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
   @media (max-width: 480px) {
     .project-item {
       grid-template-columns: 1fr;
@@ -195,6 +218,11 @@ const featured = getFeaturedProjects();
 
     .project-number {
       display: none;
+    }
+
+    .project-thumbnail {
+      width: 64px;
+      height: 64px;
     }
   }
 </style>

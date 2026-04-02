@@ -36,6 +36,14 @@ const htmlLang = locale === 'zh-TW' ? 'zh-Hant-TW' : 'en';
       rel="stylesheet"
     />
   </head>
+  <script is:inline>
+    (function () {
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = saved || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
   <body>
     <Nav locale={locale} t={t} />
     <main>
@@ -55,6 +63,7 @@ const htmlLang = locale === 'zh-TW' ? 'zh-Hant-TW' : 'en';
     --accent: oklch(58% 0.14 50);
     --accent-light: oklch(88% 0.06 60);
     --rule: oklch(88% 0.01 80);
+    --theme-transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 
     --font-display: 'Cormorant Garamond', 'Noto Serif TC', Georgia, serif;
     --font-body: 'DM Sans', 'Noto Sans TC', sans-serif;
@@ -83,6 +92,30 @@ const htmlLang = locale === 'zh-TW' ? 'zh-Hant-TW' : 'en';
     --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: oklch(93% 0.01 80);
+      --ink-muted: oklch(68% 0.01 80);
+      --ink-faint: oklch(50% 0.01 80);
+      --paper: oklch(13% 0.01 60);
+      --paper-warm: oklch(16% 0.012 60);
+      --accent: oklch(68% 0.14 50);
+      --accent-light: oklch(28% 0.06 60);
+      --rule: oklch(24% 0.01 60);
+    }
+  }
+
+  [data-theme="dark"] {
+    --ink: oklch(93% 0.01 80);
+    --ink-muted: oklch(68% 0.01 80);
+    --ink-faint: oklch(50% 0.01 80);
+    --paper: oklch(13% 0.01 60);
+    --paper-warm: oklch(16% 0.012 60);
+    --accent: oklch(68% 0.14 50);
+    --accent-light: oklch(28% 0.06 60);
+    --rule: oklch(24% 0.01 60);
+  }
+
   *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -98,6 +131,7 @@ const htmlLang = locale === 'zh-TW' ? 'zh-Hant-TW' : 'en';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
+    transition: var(--theme-transition);
   }
 
   body {
