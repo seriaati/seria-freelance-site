@@ -40,15 +40,15 @@ export const testimonials: Testimonial[] = [
     platform: 'Discord',
   },
   {
-    id: 'testimonial-2',
-    author: '不要嘻嘻哈哈',
+    id: 'testimonial-5',
+    author: 'N先生',
     role: {
-      en: 'Small Discord Community Owner',
-      'zh-TW': '小型 Discord 社群主',
+      en: 'League of Legends Community Owner',
+      'zh-TW': '英雄聯盟遊戲社群',
     },
     body: {
-      en: 'Seria made a Discord bot for me. Very easy to communicate with and really understood what I wanted. The final product turned out great. I especially love the tiered management feature.',
-      'zh-TW': 'Seria 幫我做了discord的機器人，很好溝通，也很理解我想要的方式，成品非常得棒。我特別喜歡分層管理的功能。',
+      en: "I sincerely appreciate Seria for customizing my Discord server! His efficiency and professionalism exceeded my expectations, and what surprised me even more was how excellent the after-sales support was! Whenever I had a small issue or wanted to make adjustments, Seria handled it quickly without any excuses — very responsible. I feel really lucky to have found such a great service provider! Highly recommend Seria to anyone looking to customize their Discord server!",
+      'zh-TW': '真心感謝 Seria 幫我客製化了 Discord 群組！他的效率和專業度都讓我非常滿意，而且更讓我驚喜的是，售後服務真的超好！中間我有任何小問題或想調整的地方，Seria 都很快就幫我處理好，完全沒有推託，很有責任感。能遇到這麼棒的服務提供者真的很幸運！強烈推薦 Seria 給所有想客製化 Discord 群組的朋友！',
     },
     platform: 'Discord',
   },
@@ -62,6 +62,45 @@ export const testimonials: Testimonial[] = [
     body: {
       en: 'Conscientious bot development, excellent and enthusiastic after-sales service, fair and affordable pricing. Very creative and full of ideas when it comes to Discord setup, and highly accommodating. Definitely worth recommending.',
       'zh-TW': '老闆良心製作機器人 售後服務很棒很熱心 價錢公道實惠對於DC搭建很有創意跟想法 配合度又很高, 值得推薦',
+    },
+    platform: 'Discord',
+  },
+  {
+    id: 'testimonial-2',
+    author: '不要嘻嘻哈哈',
+    role: {
+      en: 'Small Discord Community Owner',
+      'zh-TW': '小型 Discord 社群主',
+    },
+    body: {
+      en: 'Seria made a Discord bot for me. Very easy to communicate with and really understood what I wanted. The final product turned out great. I especially love the tiered management feature.',
+      'zh-TW': 'Seria 幫我做了discord的機器人，很好溝通，也很理解我想要的方式，成品非常得棒。我特別喜歡分層管理的功能。',
+    },
+    platform: 'Discord',
+  },
+  {
+    id: 'testimonial-6',
+    author: 'J小姐',
+    role: {
+      en: 'K-pop Fan Club Owner',
+      'zh-TW': '韓國女團粉絲後援團',
+    },
+    body: {
+      en: "Thank you Seria for setting up my server! It saved me from so many tedious steps. After taking over the server, I found that many settings had notes left for me, which I thought was a great touch! Basically I can just use it without thinking — truly grateful. On top of that, his efficiency is great, the discussions throughout the process were clear and easy to understand, and the pricing is very affordable! This was a really wonderful experience overall, and I'll definitely come back if I need anything again 👍",
+      'zh-TW': '感謝Seria替我創建伺服器！省去了很多對我來說繁瑣的流程，接手伺服器後很多設定都有幫我備註我也覺得很棒！基本上只要無腦使用就好了真的大感謝，另外他效率很高，過程的討論也有效讓人理解，收費很實惠！這次的消費體驗真的非常好，之後有需要也會再回購👍',
+    },
+    platform: 'Discord',
+  },
+  {
+    id: 'testimonial-7',
+    author: '連先生',
+    role: {
+      en: 'Game Guild Owner',
+      'zh-TW': '遊戲公會群組',
+    },
+    body: {
+      en: "Seria helped me create a game guild server. Throughout the collaboration, every question was answered promptly and the whole process was incredibly efficient. I'm very satisfied with the final result hahaha — I'll definitely come back if I need anything again. I especially love the self-service bot feature, it looks really cool.",
+      'zh-TW': 'Seria 老闆幫我創了遊戲公會類型的群組，合作的過成中有問必答，而且特別有效率，成品我相當的滿意哈哈哈，有需要絕對會再找老闆。我特別喜歡那個自助機器人的功能，看起來很有感覺',
     },
     platform: 'Discord',
   },
