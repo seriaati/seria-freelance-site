@@ -279,22 +279,25 @@ const { locale, t } = Astro.props;
   let current = 0;
 
   function measureWidth() {
-    let maxWidth = 0;
-    words.forEach(w => {
-      const el = w;
-      el.style.position = 'static';
-      el.style.opacity = '1';
-      el.style.transform = 'none';
-      const width = el.getBoundingClientRect().width;
-      if (width > maxWidth) maxWidth = width;
-      el.style.position = '';
-      el.style.opacity = '';
-      el.style.transform = '';
-    });
     const switcher = track.closest('.hero-switcher');
-    if (switcher) {
-      switcher.style.width = maxWidth + 'px';
-    }
+    if (!switcher) return;
+
+    words.forEach(w => {
+      w.style.position = 'static';
+      w.style.opacity = '1';
+      w.style.transform = 'none';
+    });
+
+    const widths = words.map(w => w.getBoundingClientRect().width);
+    const maxWidth = Math.max(...widths);
+
+    words.forEach(w => {
+      w.style.position = '';
+      w.style.opacity = '';
+      w.style.transform = '';
+    });
+
+    switcher.style.width = maxWidth + 'px';
   }
 
   function activate(index) {
