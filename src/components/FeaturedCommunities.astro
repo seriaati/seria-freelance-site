@@ -22,7 +22,7 @@ const featured = getFeaturedServers();
     <div class="servers-grid">
       {featured.map((server) => {
         const tags = server.tags ? (getServerField(server, 'tags', locale) as string[]) : null;
-        const category = server.category ? (getServerField(server, 'category', locale) as string) : null;
+        const category = server.category ? (getServerField(server, 'category', locale) as unknown as string) : null;
         return (
           <article class="server-card">
             <div class="card-top">
@@ -36,7 +36,7 @@ const featured = getFeaturedServers();
             </div>
 
             <div class="card-body">
-              <h3 class="server-name">{getServerField(server, 'name', locale)}</h3>
+              <h3 class="server-name">{server.name}</h3>
               <p class="server-purpose">{getServerField(server, 'purpose', locale)}</p>
             </div>
 
