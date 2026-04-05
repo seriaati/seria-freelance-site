@@ -263,6 +263,19 @@ export const discordServers: DiscordServer[] = [
       'zh-TW': ['歡迎系統', '反應身分組'],
     },
   },
+  {
+    id: 'moonlight',
+    memberCount: 88,
+    name: '漪月流光',
+    purpose: {
+      en: 'Gaming community server for When Winds Meet.',
+      'zh-TW': '燕雲十六聲遊戲社群伺服器。',
+    },
+    tags: {
+      en: ['Welcoming System', 'Reaction Roles', 'Giveaway'],
+      'zh-TW': ['歡迎系統', '反應身分組', '抽獎'],
+    },
+  },
 ];
 
 export function getServerField<K extends keyof DiscordServer>(
