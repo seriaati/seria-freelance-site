@@ -42,8 +42,8 @@ export const projects: Project[] = [
     featured: false,
     year: '2026',
     title: {
-      en: 'Custom Giveaway Bot',
-      'zh-TW': '客製化抽獎機器人',
+      en: 'Number Giveaway Bot',
+      'zh-TW': '數字抽獎機器人',
     },
     category: {
       en: 'Discord Bot',
