@@ -21,6 +21,23 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: 'guild-mass-dm',
+    featured: false,
+    year: '2026',
+    title: {
+      en: 'Discord Mass-DM Bot',
+      'zh-TW': 'Discord 群發訊息機器人',
+    },
+    category: {
+      en: 'Discord Bot',
+      'zh-TW': 'Discord 機器人',
+    },
+    description: {
+      en: 'A Discord bot that lets you mass DMs with specific messages to all members of a guild.',
+      'zh-TW': '一個 Discord 機器人，可以向伺服器內的所有成員發送指定訊息。',
+    },
+  },
+  {
     id: 'unitrpg',
     featured: false,
     year: '2026',
@@ -127,16 +144,16 @@ export const projects: Project[] = [
     featured: false,
     year: '2026',
     title: {
-      en: 'Discord Server Stress Tester',
-      'zh-TW': 'Discord 伺服器壓力測試工具',
+      en: 'Discord Ad-Sending Program',
+      'zh-TW': 'Discord 廣告發送程式',
     },
     category: {
       en: 'Discord Bot',
       'zh-TW': 'Discord 機器人',
     },
     description: {
-      en: 'A Discord server stress-testing tool that orchestrates multiple self-bot accounts to concurrently post messages across specified guilds and channels with configurable intervals, randomized identities, and flexible token management.',
-      'zh-TW': '一個 Discord 伺服器壓力測試工具，可協調多個自動機器人帳號同時在指定的伺服器和頻道發送訊息，支援可配置的發送間隔、隨機化身份和靈活的 Token 管理。',
+      en: 'A Discord ad-sending program that orchestrates multiple self-bot accounts to concurrently post messages across specified guilds and channels with configurable intervals, randomized identities, and account management.',
+      'zh-TW': '一個 Discord 廣告發送程式，可協調多個自動機器人帳號同時在指定的伺服器和頻道發送訊息，支援可配置的發送間隔、隨機偽裝身份和帳戶管理。',
     },
   },
   {
